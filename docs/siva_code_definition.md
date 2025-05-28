@@ -14,6 +14,7 @@
 - **String**: *str*
 - **Booleano**: *bool*
 - **Undefined**: *undefined*
+- **Array**: *array*
 
 ## Definición de variables
 ```typescript
@@ -27,6 +28,7 @@ var edad: int = 22
 var cambio: float = 45.84
 var nombre: str = "Reuben Rhienhart"
 var cliente_frecuente: bool = 1
+var tareas: array = []
 ```
 
 ## Delimitadores de bloque de código
@@ -54,27 +56,38 @@ elif cliente_frecuente != true {
     print("No eres cliente frecuente")
 }
 ```
+
 ## Ciclo
-El único ciclo será con el típico for-loop
+El único ciclo será con el típico for-loop y while-loop
 ```typescript
 for var: int = x in range(10) {
     print(x)
 }
+
+while cliente_frecuente {
+    print("Eres cliente frecuente")
+}
+
+while x < 10 {
+    print(x)
+    x = x + 1
+}
 ```
 
 ## Funciones
-```go
-func print(msg:str) {
-	return msg
+```typescript
+func nombre_funcion(param1: tipo, param2: tipo): tipo_retorno {
+    // Bloque de código
+    return valor;
 }
+```
 
-func hola() {
-	var mensaje: str = "Hola mundo"
-	print(mensaje)
-}
-
+## Programa principal
+```typescript
 func main() {
-	hola()
+    var resultado: int = 0;
+    print("Inicio del programa");
+    // Llamadas a funciones y lógica del programa
 }
 ```
 
@@ -108,7 +121,7 @@ func main() {
 }
 ```
 
-```siv
+```py
 # Funciones incluidas en el lenguaje
 
 ## Método para imprimir en consola
@@ -144,3 +157,7 @@ bool(valor: any) -> bool
 input(prompt: str) -> str
 - Muestra el mensaje de prompt al usuario
 - Devuelve la entrada del usuario como string
+
+## Hacer append en los arreglos
+arreglo.append(elemento: any) -> void
+- Agrega un elemento al final del arreglo

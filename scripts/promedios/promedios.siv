@@ -1,6 +1,4 @@
-# Programa para calcular el promedio de calificaciones de un estudiante
-
-func calcularPromedio(calificaciones: [int]): float {
+func calcularPromedio(calificaciones: array): float {
     var suma: int = 0
     var cantidad: int = len(calificaciones)
     
@@ -12,7 +10,7 @@ func calcularPromedio(calificaciones: [int]): float {
 }
 
 func main() {
-    var calificaciones: [int] = [85, 90, 78, 92, 88]
+    var calificaciones: array = [85, 90, 78, 92, 88]
     var promedio: float = calcularPromedio(calificaciones)
     
     print("Calificaciones del estudiante:")

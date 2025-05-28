@@ -22,6 +22,7 @@ type Token struct {
 // Token types
 const (
 	TOKEN_INVALID TokenType = iota
+	TOKEN_INPUT
 	TOKEN_IDENTIFIER
 	TOKEN_NUMBER
 	TOKEN_STRING
@@ -69,6 +70,8 @@ const (
 	TOKEN_RESERVED_NUM
 	TOKEN_RESERVED_LENGTH
 	TOKEN_RESERVED_INPUT
+	TOKEN_RESERVED_WHILE
+	TOKEN_RESERVED_ARRAY
 	TOKEN_COMMENT
 	TOKEN_EOF
 )
@@ -170,6 +173,10 @@ func (t TokenType) String() string {
 		return "LENGTH"
 	case TOKEN_RESERVED_INPUT:
 		return "INPUT"
+	case TOKEN_RESERVED_WHILE:
+		return "WHILE"
+	case TOKEN_RESERVED_ARRAY:
+		return "ARRAY"
 	case TOKEN_COMMENT:
 		return "COMMENT"
 	case TOKEN_EOF:

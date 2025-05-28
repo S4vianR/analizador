@@ -11,6 +11,7 @@ import (
 
 	"analizador/pkg/lexer"
 	"analizador/pkg/parser"
+
 	"github.com/schollz/progressbar/v3"
 )
 
@@ -28,7 +29,7 @@ func main() {
 
 	// 1. Ejecutar el analizador léxico
 	fmt.Println("🔍 Ejecutando análisis léxico...")
-	
+
 	// Crear y configurar la barra de progreso
 	bar := progressbar.NewOptions(100,
 		progressbar.OptionSetDescription("Analizando código..."),
@@ -70,7 +71,7 @@ func main() {
 
 	// Cargar y analizar los tokens usando el parser
 	fmt.Println("\n🔍 Ejecutando análisis sintáctico...")
-	
+
 	// Crear barra de progreso para el análisis sintáctico
 	syntaxBar := progressbar.NewOptions(100,
 		progressbar.OptionSetDescription("Analizando sintaxis..."),
@@ -106,18 +107,16 @@ func main() {
 		done <- true
 	}()
 
-	p, err := parser.NewParserFromFile(tokensFile)
+	// Crear el parser usando el archivo de tokens y el archivo fuente
+	p, err := parser.NewParserFromFile(tokensFile, sourceFile)
 	if err != nil {
 		log.Fatalf("Error al crear el analizador sintáctico: %v", err)
 	}
 
-	// Establecer el archivo fuente para mensajes de error más descriptivos
-	p.SetSourceFile(sourceFile)
-
 	// Canal para recibir el AST y el error del análisis
 	astChan := make(chan struct {
-		ast  interface{}
-		err  error
+		ast interface{}
+		err error
 	}, 1)
 
 	// Ejecutar el análisis sintáctico en una goroutine
@@ -134,19 +133,18 @@ func main() {
 	case result := <-astChan:
 		// Si el análisis termina primero, forzar la finalización de la barra
 		forceFinish <- true
-		<-done // Esperar a que la goroutine de la barra termine
+		<-done                // Esperar a que la goroutine de la barra termine
 		fmt.Print("\r\033[K") // Limpiar la línea actual
-		
+
 		if result.err != nil {
 			// Mostrar el error en rojo
-			fmt.Printf("\n\033[31m❌ Error en el análisis sintáctico:\n\033[0m")
-			fmt.Printf("\033[31m%s\033[0m\n", result.err)
+			fmt.Printf("\n❌ Error de sintaxis en la línea %s\n", result.err)
 			os.Exit(1)
 		}
 
-		// Mostrar mensaje de éxito en verde
-		fmt.Printf("\n\033[32m✅ Análisis sintáctico completado exitosamente\033[0m\n")
-		
+		// Mostrar mensaje de éxito claro
+		fmt.Printf("\n✅ El código es válido.\n")
+
 		// Guardar el AST en un archivo JSON
 		astFile := strings.TrimSuffix(sourceFile, ".siv") + ".ast.json"
 		astJSON, err := json.MarshalIndent(result.ast, "", "  ")
@@ -157,22 +155,21 @@ func main() {
 		} else {
 			fmt.Printf("✅ AST guardado en: %s\n", astFile)
 		}
-		
+
 	case <-done:
 		// Si la barra de progreso termina primero, esperar el resultado del análisis
 		result := <-astChan
 		fmt.Print("\r\033[K") // Limpiar la línea actual
-		
+
 		if result.err != nil {
 			// Mostrar el error en rojo
-			fmt.Printf("\n\033[31m❌ Error en el análisis sintáctico:\n\033[0m")
-			fmt.Printf("\033[31m%s\033[0m\n", result.err)
+			fmt.Printf("\n❌ Error de sintaxis en la línea %s\n", result.err)
 			os.Exit(1)
 		}
-		
-		// Mostrar mensaje de éxito en verde
-		fmt.Printf("\n\033[32m✅ Análisis sintáctico completado exitosamente\033[0m\n")
-		
+
+		// Mostrar mensaje de éxito claro
+		fmt.Printf("\n✅ El código es válido.\n")
+
 		// Guardar el AST en un archivo JSON
 		astFile := strings.TrimSuffix(sourceFile, ".siv") + ".ast.json"
 		astJSON, err := json.MarshalIndent(result.ast, "", "  ")

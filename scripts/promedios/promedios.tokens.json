@@ -1,594 +1,900 @@
 [
   {
-    "type": "COMMENT",
-    "lexeme": "# Programa para calcular el promedio de calificaciones de un estudiante",
-    "line": 0,
-    "column": 0
-  },
-  {
     "type": "FUNC",
     "lexeme": "func",
-    "line": 0,
-    "column": 0
+    "line": 1,
+    "column": 1
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "calcularPromedio(calificaciones:",
-    "line": 0,
-    "column": 0
+    "lexeme": "calcularPromedio",
+    "line": 1,
+    "column": 6
   },
   {
-    "type": "LBRACKET",
-    "lexeme": "[",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "int]):",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "FLOAT",
-    "lexeme": "float",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "LBRACE",
-    "lexeme": "{",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "VAR",
-    "lexeme": "var",
-    "line": 0,
-    "column": 0
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 1,
+    "column": 22
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "suma:",
-    "line": 0,
-    "column": 0
+    "lexeme": "calificaciones",
+    "line": 1,
+    "column": 23
   },
   {
-    "type": "INT",
-    "lexeme": "int",
-    "line": 0,
-    "column": 0
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1,
+    "column": 37
   },
   {
-    "type": "ASSIGN",
-    "lexeme": "=",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "NUMBER",
-    "lexeme": "0",
-    "literal": "0",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "VAR",
-    "lexeme": "var",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "cantidad:",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "INT",
-    "lexeme": "int",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "ASSIGN",
-    "lexeme": "=",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "len(calificaciones)",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "FOR",
-    "lexeme": "for",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "VAR",
-    "lexeme": "var",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "i:",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "INT",
-    "lexeme": "int",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "ASSIGN",
-    "lexeme": "=",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "NUMBER",
-    "lexeme": "0",
-    "literal": "0",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IN",
-    "lexeme": "in",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "range(cantidad)",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "LBRACE",
-    "lexeme": "{",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "suma",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "ASSIGN",
-    "lexeme": "=",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "suma",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "PLUS",
-    "lexeme": "+",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "calificaciones[i]",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "RBRACE",
-    "lexeme": "}",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "RETURN",
-    "lexeme": "return",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "float(suma)",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "DIVIDE",
-    "lexeme": "/",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "float(cantidad)",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "RBRACE",
-    "lexeme": "}",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "FUNC",
-    "lexeme": "func",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "main()",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "LBRACE",
-    "lexeme": "{",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "VAR",
-    "lexeme": "var",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "calificaciones:",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "LBRACKET",
-    "lexeme": "[",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "int]",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "ASSIGN",
-    "lexeme": "=",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "LBRACKET",
-    "lexeme": "[",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "85,",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "90,",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "78,",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "92,",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "88]",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "VAR",
-    "lexeme": "var",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "promedio:",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "FLOAT",
-    "lexeme": "float",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "ASSIGN",
-    "lexeme": "=",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "IDENTIFIER",
-    "lexeme": "calcularPromedio(calificaciones)",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "STRING",
-    "lexeme": "print(Calificaciones del estudiante:",
-    "literal": "print(Calificaciones del estudiante:",
-    "line": 0,
-    "column": 0
+    "type": "ARRAY",
+    "lexeme": "array",
+    "line": 1,
+    "column": 39
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 1,
+    "column": 44
   },
   {
-    "type": "FOR",
-    "lexeme": "for",
-    "line": 0,
-    "column": 0
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1,
+    "column": 45
+  },
+  {
+    "type": "FLOAT",
+    "lexeme": "float",
+    "line": 1,
+    "column": 47
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 1,
+    "column": 53
   },
   {
     "type": "VAR",
     "lexeme": "var",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 5
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "i:",
-    "line": 0,
-    "column": 0
+    "lexeme": "suma",
+    "line": 2,
+    "column": 9
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 2,
+    "column": 13
   },
   {
     "type": "INT",
     "lexeme": "int",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 15
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 19
   },
   {
     "type": "NUMBER",
     "lexeme": "0",
     "literal": "0",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 21
+  },
+  {
+    "type": "VAR",
+    "lexeme": "var",
+    "line": 3,
+    "column": 5
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "cantidad",
+    "line": 3,
+    "column": 9
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 3,
+    "column": 17
+  },
+  {
+    "type": "INT",
+    "lexeme": "int",
+    "line": 3,
+    "column": 19
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 3,
+    "column": 23
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "len",
+    "line": 3,
+    "column": 25
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 3,
+    "column": 28
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "calificaciones",
+    "line": 3,
+    "column": 29
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 3,
+    "column": 43
+  },
+  {
+    "type": "FOR",
+    "lexeme": "for",
+    "line": 5,
+    "column": 5
+  },
+  {
+    "type": "VAR",
+    "lexeme": "var",
+    "line": 5,
+    "column": 9
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "i",
+    "line": 5,
+    "column": 13
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 5,
+    "column": 14
+  },
+  {
+    "type": "INT",
+    "lexeme": "int",
+    "line": 5,
+    "column": 16
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 5,
+    "column": 20
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "0",
+    "literal": "0",
+    "line": 5,
+    "column": 22
   },
   {
     "type": "IN",
     "lexeme": "in",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 24
+  },
+  {
+    "type": "RANGE",
+    "lexeme": "range",
+    "line": 5,
+    "column": 27
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 5,
+    "column": 32
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "range(len(calificaciones))",
-    "line": 0,
-    "column": 0
+    "lexeme": "cantidad",
+    "line": 5,
+    "column": 33
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 5,
+    "column": 41
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 43
   },
   {
-    "type": "STRING",
-    "lexeme": "print(  - ",
-    "literal": "print(  - ",
-    "line": 0,
-    "column": 0
+    "type": "IDENTIFIER",
+    "lexeme": "suma",
+    "line": 6,
+    "column": 9
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 6,
+    "column": 14
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "suma",
+    "line": 6,
+    "column": 16
   },
   {
     "type": "PLUS",
     "lexeme": "+",
-    "line": 0,
-    "column": 0
+    "line": 6,
+    "column": 21
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "str(calificaciones[i]))",
-    "line": 0,
-    "column": 0
+    "lexeme": "calificaciones[i]",
+    "line": 6,
+    "column": 23
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 7,
+    "column": 5
   },
   {
-    "type": "STRING",
-    "lexeme": "print(Promedio: ",
-    "literal": "print(Promedio: ",
-    "line": 0,
-    "column": 0
+    "type": "RETURN",
+    "lexeme": "return",
+    "line": 9,
+    "column": 5
   },
   {
-    "type": "PLUS",
-    "lexeme": "+",
-    "line": 0,
-    "column": 0
+    "type": "FLOAT",
+    "lexeme": "float",
+    "line": 9,
+    "column": 12
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 9,
+    "column": 17
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "str(promedio))",
-    "line": 0,
-    "column": 0
+    "lexeme": "suma",
+    "line": 9,
+    "column": 18
   },
   {
-    "type": "IF",
-    "lexeme": "if",
-    "line": 0,
-    "column": 0
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 9,
+    "column": 22
+  },
+  {
+    "type": "DIVIDE",
+    "lexeme": "/",
+    "line": 9,
+    "column": 24
+  },
+  {
+    "type": "FLOAT",
+    "lexeme": "float",
+    "line": 9,
+    "column": 26
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 9,
+    "column": 31
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "cantidad",
+    "line": 9,
+    "column": 32
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 9,
+    "column": 40
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 10,
+    "column": 1
+  },
+  {
+    "type": "FUNC",
+    "lexeme": "func",
+    "line": 12,
+    "column": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "main",
+    "line": 12,
+    "column": 6
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 12,
+    "column": 10
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 12,
+    "column": 11
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 12,
+    "column": 13
+  },
+  {
+    "type": "VAR",
+    "lexeme": "var",
+    "line": 13,
+    "column": 5
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "calificaciones",
+    "line": 13,
+    "column": 9
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 13,
+    "column": 23
+  },
+  {
+    "type": "ARRAY",
+    "lexeme": "array",
+    "line": 13,
+    "column": 25
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 13,
+    "column": 31
+  },
+  {
+    "type": "LBRACKET",
+    "lexeme": "[",
+    "line": 13,
+    "column": 33
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "85,",
+    "line": 13,
+    "column": 34
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "90,",
+    "line": 13,
+    "column": 38
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "78,",
+    "line": 13,
+    "column": 42
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "92,",
+    "line": 13,
+    "column": 46
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "88]",
+    "line": 13,
+    "column": 50
+  },
+  {
+    "type": "VAR",
+    "lexeme": "var",
+    "line": 14,
+    "column": 5
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "promedio",
-    "line": 0,
-    "column": 0
+    "line": 14,
+    "column": 9
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 14,
+    "column": 17
+  },
+  {
+    "type": "FLOAT",
+    "lexeme": "float",
+    "line": 14,
+    "column": 19
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 14,
+    "column": 25
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "calcularPromedio",
+    "line": 14,
+    "column": 27
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 14,
+    "column": 43
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "calificaciones",
+    "line": 14,
+    "column": 44
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 14,
+    "column": 58
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 16,
+    "column": 5
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 16,
+    "column": 10
+  },
+  {
+    "type": "STRING",
+    "lexeme": "Calificaciones del estudiante:",
+    "literal": "Calificaciones del estudiante:",
+    "line": 16,
+    "column": 11
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 16,
+    "column": 43
+  },
+  {
+    "type": "FOR",
+    "lexeme": "for",
+    "line": 17,
+    "column": 5
+  },
+  {
+    "type": "VAR",
+    "lexeme": "var",
+    "line": 17,
+    "column": 9
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "i",
+    "line": 17,
+    "column": 13
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 17,
+    "column": 14
+  },
+  {
+    "type": "INT",
+    "lexeme": "int",
+    "line": 17,
+    "column": 16
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 17,
+    "column": 20
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "0",
+    "literal": "0",
+    "line": 17,
+    "column": 22
+  },
+  {
+    "type": "IN",
+    "lexeme": "in",
+    "line": 17,
+    "column": 24
+  },
+  {
+    "type": "RANGE",
+    "lexeme": "range",
+    "line": 17,
+    "column": 27
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 17,
+    "column": 32
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "len",
+    "line": 17,
+    "column": 33
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 17,
+    "column": 36
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "calificaciones",
+    "line": 17,
+    "column": 37
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 17,
+    "column": 51
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 17,
+    "column": 52
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 17,
+    "column": 54
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 18,
+    "column": 9
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 18,
+    "column": 14
+  },
+  {
+    "type": "STRING",
+    "lexeme": "  - ",
+    "literal": "  - ",
+    "line": 18,
+    "column": 15
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 18,
+    "column": 22
+  },
+  {
+    "type": "STR",
+    "lexeme": "str",
+    "line": 18,
+    "column": 24
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 18,
+    "column": 27
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "calificaciones[i]",
+    "line": 18,
+    "column": 28
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 18,
+    "column": 45
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 18,
+    "column": 46
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 19,
+    "column": 5
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 21,
+    "column": 5
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 21,
+    "column": 10
+  },
+  {
+    "type": "STRING",
+    "lexeme": "Promedio: ",
+    "literal": "Promedio: ",
+    "line": 21,
+    "column": 11
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 21,
+    "column": 24
+  },
+  {
+    "type": "STR",
+    "lexeme": "str",
+    "line": 21,
+    "column": 26
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 21,
+    "column": 29
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "promedio",
+    "line": 21,
+    "column": 30
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 21,
+    "column": 38
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 21,
+    "column": 39
+  },
+  {
+    "type": "IF",
+    "lexeme": "if",
+    "line": 23,
+    "column": 5
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "promedio",
+    "line": 23,
+    "column": 8
   },
   {
     "type": "GREATER_EQUAL",
     "lexeme": "\u003e=",
-    "line": 0,
-    "column": 0
+    "line": 23,
+    "column": 17
   },
   {
     "type": "NUMBER",
     "lexeme": "90",
     "literal": "90",
-    "line": 0,
-    "column": 0
+    "line": 23,
+    "column": 20
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 23,
+    "column": 23
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 24,
+    "column": 9
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 24,
+    "column": 14
   },
   {
     "type": "STRING",
-    "lexeme": "print(¡Excelente trabajo!",
-    "literal": "print(¡Excelente trabajo!",
-    "line": 0,
-    "column": 0
+    "lexeme": "¡Excelente trabajo!",
+    "literal": "¡Excelente trabajo!",
+    "line": 24,
+    "column": 15
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 24,
+    "column": 37
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 25,
+    "column": 5
   },
   {
     "type": "ELIF",
     "lexeme": "elif",
-    "line": 0,
-    "column": 0
+    "line": 25,
+    "column": 7
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "promedio",
-    "line": 0,
-    "column": 0
+    "line": 25,
+    "column": 12
   },
   {
     "type": "GREATER_EQUAL",
     "lexeme": "\u003e=",
-    "line": 0,
-    "column": 0
+    "line": 25,
+    "column": 21
   },
   {
     "type": "NUMBER",
     "lexeme": "80",
     "literal": "80",
-    "line": 0,
-    "column": 0
+    "line": 25,
+    "column": 24
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 25,
+    "column": 27
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 26,
+    "column": 9
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 26,
+    "column": 14
   },
   {
     "type": "STRING",
-    "lexeme": "print(Buen trabajo",
-    "literal": "print(Buen trabajo",
-    "line": 0,
-    "column": 0
+    "lexeme": "Buen trabajo",
+    "literal": "Buen trabajo",
+    "line": 26,
+    "column": 15
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 26,
+    "column": 29
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 27,
+    "column": 5
   },
   {
     "type": "ELSE",
     "lexeme": "else",
-    "line": 0,
-    "column": 0
+    "line": 27,
+    "column": 7
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 27,
+    "column": 12
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 28,
+    "column": 9
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 28,
+    "column": 14
   },
   {
     "type": "STRING",
-    "lexeme": "print(Necesitas mejorar",
-    "literal": "print(Necesitas mejorar",
-    "line": 0,
-    "column": 0
+    "lexeme": "Necesitas mejorar",
+    "literal": "Necesitas mejorar",
+    "line": 28,
+    "column": 15
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 28,
+    "column": 34
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 29,
+    "column": 5
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 30,
+    "column": 1
   },
   {
     "type": "EOF",
-    "line": 0,
-    "column": 0
+    "line": 31,
+    "column": 1
   }
 ]

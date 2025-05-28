@@ -1,0 +1,91 @@
+# Gramática BNF para el lenguaje SIVA
+
+# Programa
+<program> ::= <statement_list>
+
+# Lista de declaraciones
+<statement_list> ::= <statement> 
+                  | <statement_list> <statement>
+
+# Declaraciones
+<statement> ::= <variable_declaration> 
+             | <function_declaration>
+             | <if_statement>
+             | <for_loop>
+             | <while_loop>
+             | <function_call>
+             | <return_statement>
+             | <block>
+
+# Declaración de variables
+<variable_declaration> ::= ("var" | "const") <identifier> ":" <type> ["=" <expression>]
+
+# Tipos de datos
+<type> ::= "int" | "float" | "str" | "bool" | "undefined" | "array"
+
+# Declaración de funciones
+<function_declaration> ::= "func" <identifier> "(" <parameter_list> ")" [":" <type>] <block>
+<parameter_list> ::= <parameter> ["," <parameter_list>] | ε
+<parameter> ::= <identifier> ":" <type>
+
+# Estructuras de control
+<if_statement> ::= "if" <expression> <block> 
+                  ["elif" <expression> <block>]* 
+                  ["else" <block>]?
+
+
+<for_loop> ::= "for" <variable_declaration> "in" "range" "(" <expression> ")" <block>
+
+<while_loop> ::= "while" <expression> <block>
+
+# Expresiones
+<expression> ::= <or_expression>
+<or_expression> ::= <and_expression> ("or" <and_expression>)*
+<and_expression> ::= <equality_expression> ("and" <equality_expression>)*
+<equality_expression> ::= <comparison_expression> (("==" | "!=") <comparison_expression>)*
+<comparison_expression> ::= <additive_expression> (("<" | "<=" | ">" | ">=") <additive_expression>)*
+<additive_expression> ::= <multiplicative_expression> (("+" | "-") <multiplicative_expression>)*
+<multiplicative_expression> ::= <unary_expression> (("*" | "/" | "%") <unary_expression>)*
+<unary_expression> ::= ("+" | "-" | "!") <primary_expression> | <primary_expression>
+<primary_expression> ::= <literal>
+                      | <identifier>
+                      | <function_call>
+                      | <array_literal>
+                      | "(" <expression> ")"
+
+# Literales
+<literal> ::= <integer>
+            | <float>
+            | <string>
+            | <boolean>
+            | "undefined"
+            | <array_literal>
+
+<integer> ::= <digit>+
+<float> ::= <digit>+ "." <digit>+
+<string> ::= '"' <character>* '"'
+<boolean> ::= "true" | "false"
+<array_literal> ::= "[" [<expression> ("," <expression>)*] "]"
+
+# Llamadas a función
+<function_call> ::= <identifier> "(" <argument_list> ")"
+<argument_list> ::= [<expression> ("," <expression>)*]
+
+# Bloques de código
+<block> ::= "{" <statement_list> "}" | <single_statement>
+<single_statement> ::= <statement>
+
+# Declaración de retorno
+<return_statement> ::= "return" [<expression>]
+
+# Identificadores
+<identifier> ::= <letter> (<letter> | <digit> | "_")*
+<letter> ::= [a-zA-Z]
+<digit> ::= [0-9]
+<character> ::= # Cualquier carácter excepto comillas y saltos de línea
+
+# Funciones incorporadas
+<builtin_function> ::= "print" | "input" | "int" | "float" | "str" | "bool" | "length" | "append"
+
+# Comentarios
+<comment> ::= "#" <character>* <newline>
