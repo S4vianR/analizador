@@ -1,0 +1,25 @@
+func main() {
+	var res: num = 0;
+	var num1: str = input("Ingresa el primer número")
+	var num2: str = input("Ingresa el segundo número")
+	var op: str = input("Ingresa el operador a usar (+,-,*,/)")
+
+	if op == "+" {
+		res: int = int(num1)+int(num2)
+	} 
+	elif op == "-" {
+		res: int = int(num1)-int(num2)
+	}
+	elif op "*" {
+		res: int = int(num1)*int(num2)
+	}
+	elif op "/" {
+		res: int = int(num1)/int(num2)
+	}
+	else {
+		print("Favor de escribir un operador válido, reiniciando...")
+		main()
+	}
+
+	print("El resultado es: " + res)
+}

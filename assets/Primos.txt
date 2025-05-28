@@ -1,0 +1,25 @@
+package analizadorLexico;
+
+public class Primos {
+    public static boolean esPrimo(int numero) {
+        int contador = 2;
+        boolean primo = true;
+        while ((primo) && (contador != numero)) {
+            if (numero % contador == 0) {
+                primo = false;
+            }
+            contador++;
+        }
+        return primo;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) {
+            if (esPrimo(i)) {
+                System.out.println(i + "es Primo");
+            } else {
+                System.out.println(i + "no es Primo");
+            }
+        }
+    }
+}
