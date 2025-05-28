@@ -1,0 +1,44 @@
+# Programa simple de lista de tareas
+
+var tareas: [str] = []
+
+func agregarTarea(tarea: str) {
+    tareas.append(tarea)
+    print("Tarea agregada: " + tarea)
+}
+
+func mostrarTareas() {
+    if len(tareas) == 0 {
+        print("No hay tareas pendientes")
+        return
+    }
+    
+    print("Tareas pendientes:")
+    for var i: int = 0 in range(len(tareas)) {
+        print(str(i+1) + ". " + tareas[i])
+    }
+}
+
+func main() {
+    var opcion: str = ""
+    
+    while opcion != "3" {
+        print("\n--- Menú de Tareas ---")
+        print("1. Agregar tarea")
+        print("2. Ver tareas")
+        print("3. Salir")
+        
+        opcion = input("Selecciona una opción: ")
+        
+        if opcion == "1" {
+            var tarea: str = input("Ingresa la tarea: ")
+            agregarTarea(tarea)
+        } elif opcion == "2" {
+            mostrarTareas()
+        } elif opcion == "3" {
+            print("¡Hasta luego!")
+        } else {
+            print("Opción no válida")
+        }
+    }
+}

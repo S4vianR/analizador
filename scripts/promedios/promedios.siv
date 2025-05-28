@@ -1,0 +1,32 @@
+# Programa para calcular el promedio de calificaciones de un estudiante
+
+func calcularPromedio(calificaciones: [int]): float {
+    var suma: int = 0
+    var cantidad: int = len(calificaciones)
+    
+    for var i: int = 0 in range(cantidad) {
+        suma = suma + calificaciones[i]
+    }
+    
+    return float(suma) / float(cantidad)
+}
+
+func main() {
+    var calificaciones: [int] = [85, 90, 78, 92, 88]
+    var promedio: float = calcularPromedio(calificaciones)
+    
+    print("Calificaciones del estudiante:")
+    for var i: int = 0 in range(len(calificaciones)) {
+        print("  - " + str(calificaciones[i]))
+    }
+    
+    print("Promedio: " + str(promedio))
+    
+    if promedio >= 90 {
+        print("¡Excelente trabajo!")
+    } elif promedio >= 80 {
+        print("Buen trabajo")
+    } else {
+        print("Necesitas mejorar")
+    }
+}

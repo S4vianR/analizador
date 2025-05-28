@@ -1,0 +1,516 @@
+🔍 Ejecutando análisis léxico...
+✅ Tokens guardados en: ./assets/promedios.tokens.json
+
+🔍 Ejecutando análisis sintáctico...
+Reading tokens from file: ./assets/promedios.tokens.json
+Starting syntax analysis...
+First 5 tokens: [{Type:COMMENT Lexeme:# Programa para calcular el promedio de calificaciones de un estudiante Literal:<nil> Line:0 Column:0} {Type:FUNC Lexeme:func Literal:<nil> Line:0 Column:0} {Type:IDENTIFIER Lexeme:calcularPromedio(calificaciones: Literal:<nil> Line:0 Column:0} {Type:LBRACKET Lexeme:[ Literal:<nil> Line:0 Column:0} {Type:IDENTIFIER Lexeme:int]): Literal:<nil> Line:0 Column:0}]
+Starting program rule...
+  In declaration rule
+runtime: goroutine stack exceeds 1000000000-byte limit
+runtime: sp=0xc0201e0360 stack=[0xc0201e0000, 0xc0401e0000]
+fatal error: stack overflow
+
+runtime stack:
+runtime.throw({0x50a90e?, 0x42acbc?})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/panic.go:1101 +0x48 fp=0xc000515e90 sp=0xc000515e60 pc=0x469ac8
+runtime.newstack()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/stack.go:1107 +0x5bb fp=0xc000515fc8 sp=0xc000515e90 pc=0x451b5b
+runtime.morestack()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:621 +0x7a fp=0xc000515fd0 sp=0xc000515fc8 pc=0x46e7ba
+
+goroutine 1 gp=0xc000002540 m=5 mp=0xc000500008 [running]:
+runtime.newobject(0x4eb380?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/malloc.go:1713 +0x35 fp=0xc0201e0370 sp=0xc0201e0368 pc=0x4148f5
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce940, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x3f fp=0xc0201e0468 sp=0xc0201e0370 pc=0x4dc37f
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce938, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0560 sp=0xc0201e0468 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce930, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0658 sp=0xc0201e0560 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce928, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0750 sp=0xc0201e0658 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce920, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0848 sp=0xc0201e0750 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce918, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0940 sp=0xc0201e0848 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce910, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0a38 sp=0xc0201e0940 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce908, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0b30 sp=0xc0201e0a38 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce900, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0c28 sp=0xc0201e0b30 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8f8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0d20 sp=0xc0201e0c28 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8f0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0e18 sp=0xc0201e0d20 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8e8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e0f10 sp=0xc0201e0e18 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8e0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e1008 sp=0xc0201e0f10 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8d8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e1100 sp=0xc0201e1008 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8d0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e11f8 sp=0xc0201e1100 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8c8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e12f0 sp=0xc0201e11f8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8c0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e13e8 sp=0xc0201e12f0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8b8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e14e0 sp=0xc0201e13e8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8b0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e15d8 sp=0xc0201e14e0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8a8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e16d0 sp=0xc0201e15d8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce8a0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e17c8 sp=0xc0201e16d0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce898, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e18c0 sp=0xc0201e17c8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce890, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e19b8 sp=0xc0201e18c0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0011ce888, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0201e1ab0 sp=0xc0201e19b8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+...4329497 frames elided...
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011a10, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401de840 sp=0xc0401de748 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011a08, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401de938 sp=0xc0401de840 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011a00, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401dea30 sp=0xc0401de938 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119f8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401deb28 sp=0xc0401dea30 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119f0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401dec20 sp=0xc0401deb28 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119e8, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401ded18 sp=0xc0401dec20 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119e0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401dee10 sp=0xc0401ded18 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119d8, 0x1, 0x485047?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401def08 sp=0xc0401dee10 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119d0, 0x1, 0x4677d7?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df000 sp=0xc0401def08 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119c8, 0x1, 0xc000012ae0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df0f8 sp=0xc0401df000 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119c0, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df1f0 sp=0xc0401df0f8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119b8, 0x1, 0xf1300?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df2e8 sp=0xc0401df1f0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119b0, 0x1, 0xc0000f13b8?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df3e0 sp=0xc0401df2e8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119a8, 0x1, 0x7f66448ab170?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df4d8 sp=0xc0401df3e0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0000119a0, 0x1, 0x50b018?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df5d0 sp=0xc0401df4d8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011998, 0x1, 0x4fd9a0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df6c8 sp=0xc0401df5d0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011990, 0x1, 0xc0000f19b8?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df7c0 sp=0xc0401df6c8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011988, 0x1, 0xc000002540?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df8b8 sp=0xc0401df7c0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011980, 0x1, 0x0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401df9b0 sp=0xc0401df8b8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011978, 0x1, 0x4a6f3c?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401dfaa8 sp=0xc0401df9b0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc000011970, 0x1, 0xc0000f1bd0?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401dfba0 sp=0xc0401dfaa8 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).skipComments(...)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:102
+analizador/pkg/parser.(*Parser).match(0xc0000a6280, {0xc0401dfcd0, 0x1, 0x1?})
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:513 +0x5e fp=0xc0401dfc98 sp=0xc0401dfba0 pc=0x4dc39e
+analizador/pkg/parser.(*Parser).declaration(0xc0000a6280)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:127 +0x7a fp=0xc0401dfd28 sp=0xc0401dfc98 pc=0x4dae5a
+analizador/pkg/parser.(*Parser).program(0xc0000a6280)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:118 +0x7d fp=0xc0401dfd88 sp=0xc0401dfd28 pc=0x4dad5d
+analizador/pkg/parser.(*Parser).Parse(0xc0000a6280)
+	/home/reuben/code/analizador/pkg/parser/analizadorSintaxis.go:86 +0x12a fp=0xc0401dfe88 sp=0xc0401dfd88 pc=0x4daaca
+main.main()
+	/home/reuben/code/analizador/main.go:54 +0x3af fp=0xc0401dff50 sp=0xc0401dfe88 pc=0x4dd5ef
+runtime.main()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:283 +0x28b fp=0xc0401dffe0 sp=0xc0401dff50 pc=0x43abcb
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0401dffe8 sp=0xc0401dffe0 pc=0x4704e1
+
+goroutine 2 gp=0xc000002a80 m=nil [force gc (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006cfa8 sp=0xc00006cf88 pc=0x469bee
+runtime.goparkunlock(...)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:441
+runtime.forcegchelper()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:348 +0xb3 fp=0xc00006cfe0 sp=0xc00006cfa8 pc=0x43af13
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006cfe8 sp=0xc00006cfe0 pc=0x4704e1
+created by runtime.init.7 in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:336 +0x1a
+
+goroutine 3 gp=0xc000002fc0 m=nil [GC sweep wait]:
+runtime.gopark(0x1?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006d780 sp=0xc00006d760 pc=0x469bee
+runtime.goparkunlock(...)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:441
+runtime.bgsweep(0xc00007c000)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgcsweep.go:316 +0xdf fp=0xc00006d7c8 sp=0xc00006d780 pc=0x426aff
+runtime.gcenable.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:204 +0x25 fp=0xc00006d7e0 sp=0xc00006d7c8 pc=0x41b1e5
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006d7e8 sp=0xc00006d7e0 pc=0x4704e1
+created by runtime.gcenable in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:204 +0x66
+
+goroutine 4 gp=0xc000003180 m=nil [sleep]:
+runtime.gopark(0xc000090060?, 0x52dffc849b7?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006df38 sp=0xc00006df18 pc=0x469bee
+runtime.goparkunlock(...)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:441
+runtime.(*scavengerState).sleep(0x5ef9c0, 0x4118b46c00000000)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgcscavenge.go:504 +0xf6 fp=0xc00006dfa8 sp=0xc00006df38 pc=0x424716
+runtime.bgscavenge(0xc00007c000)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgcscavenge.go:662 +0x74 fp=0xc00006dfc8 sp=0xc00006dfa8 pc=0x424b14
+runtime.gcenable.gowrap2()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:205 +0x25 fp=0xc00006dfe0 sp=0xc00006dfc8 pc=0x41b185
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006dfe8 sp=0xc00006dfe0 pc=0x4704e1
+created by runtime.gcenable in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:205 +0xa5
+
+goroutine 5 gp=0xc000003880 m=nil [finalizer wait]:
+runtime.gopark(0x60ffc0?, 0x490013?, 0x78?, 0xc6?, 0x4134be?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006c630 sp=0xc00006c610 pc=0x469bee
+runtime.runfinq()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mfinal.go:196 +0x107 fp=0xc00006c7e0 sp=0xc00006c630 pc=0x41a1a7
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006c7e8 sp=0xc00006c7e0 pc=0x4704e1
+created by runtime.createfing in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mfinal.go:166 +0x3d
+
+goroutine 6 gp=0xc000003c00 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006e738 sp=0xc00006e718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006e7c8 sp=0xc00006e738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006e7e0 sp=0xc00006e7c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006e7e8 sp=0xc00006e7e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 7 gp=0xc000003dc0 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006ef38 sp=0xc00006ef18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006efc8 sp=0xc00006ef38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006efe0 sp=0xc00006efc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006efe8 sp=0xc00006efe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 8 gp=0xc000492000 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006f738 sp=0xc00006f718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006f7c8 sp=0xc00006f738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006f7e0 sp=0xc00006f7c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006f7e8 sp=0xc00006f7e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 9 gp=0xc0004921c0 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006ff38 sp=0xc00006ff18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006ffc8 sp=0xc00006ff38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006ffe0 sp=0xc00006ffc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006ffe8 sp=0xc00006ffe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 10 gp=0xc000492380 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000068738 sp=0xc000068718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc0000687c8 sp=0xc000068738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc0000687e0 sp=0xc0000687c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0000687e8 sp=0xc0000687e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 11 gp=0xc000492540 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000068f38 sp=0xc000068f18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc000068fc8 sp=0xc000068f38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc000068fe0 sp=0xc000068fc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000068fe8 sp=0xc000068fe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 12 gp=0xc000492700 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000069738 sp=0xc000069718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc0000697c8 sp=0xc000069738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc0000697e0 sp=0xc0000697c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0000697e8 sp=0xc0000697e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 13 gp=0xc0004928c0 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000069f38 sp=0xc000069f18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc000069fc8 sp=0xc000069f38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc000069fe0 sp=0xc000069fc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000069fe8 sp=0xc000069fe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 14 gp=0xc000492a80 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006a738 sp=0xc00006a718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006a7c8 sp=0xc00006a738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006a7e0 sp=0xc00006a7c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006a7e8 sp=0xc00006a7e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 15 gp=0xc000492c40 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006af38 sp=0xc00006af18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006afc8 sp=0xc00006af38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006afe0 sp=0xc00006afc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006afe8 sp=0xc00006afe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 16 gp=0xc000492e00 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006b738 sp=0xc00006b718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006b7c8 sp=0xc00006b738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006b7e0 sp=0xc00006b7c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006b7e8 sp=0xc00006b7e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 17 gp=0xc000492fc0 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00006bf38 sp=0xc00006bf18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00006bfc8 sp=0xc00006bf38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00006bfe0 sp=0xc00006bfc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00006bfe8 sp=0xc00006bfe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 18 gp=0xc000493180 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0xc000498778?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000498738 sp=0xc000498718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc0004987c8 sp=0xc000498738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc0004987e0 sp=0xc0004987c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0004987e8 sp=0xc0004987e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 19 gp=0xc000493340 m=nil [GC worker (idle)]:
+runtime.gopark(0xc000499030?, 0x4dc39e?, 0x80?, 0x62?, 0xc0001d8218?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000498f38 sp=0xc000498f18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc000498fc8 sp=0xc000498f38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc000498fe0 sp=0xc000498fc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000498fe8 sp=0xc000498fe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 20 gp=0xc000493500 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x0?, 0x0?, 0x4137e6?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000499738 sp=0xc000499718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc0004997c8 sp=0xc000499738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc0004997e0 sp=0xc0004997c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc0004997e8 sp=0xc0004997e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 21 gp=0xc0004936c0 m=nil [GC worker (idle)]:
+runtime.gopark(0x7f65fde1ddf8?, 0x7f66448a2108?, 0xa0?, 0x7?, 0xc0001d8190?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc000499f38 sp=0xc000499f18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc000499fc8 sp=0xc000499f38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc000499fe0 sp=0xc000499fc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc000499fe8 sp=0xc000499fe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 22 gp=0xc000493880 m=nil [GC worker (idle)]:
+runtime.gopark(0x0?, 0x0?, 0x70?, 0xa7?, 0x4148e5?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00049a738 sp=0xc00049a718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00049a7c8 sp=0xc00049a738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00049a7e0 sp=0xc00049a7c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00049a7e8 sp=0xc00049a7e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 23 gp=0xc000493a40 m=nil [GC worker (idle)]:
+runtime.gopark(0x52dc39e9090?, 0xc0000a6280?, 0x10?, 0x81?, 0x1?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00049af38 sp=0xc00049af18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00049afc8 sp=0xc00049af38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00049afe0 sp=0xc00049afc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00049afe8 sp=0xc00049afe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 24 gp=0xc000493c00 m=nil [GC worker (idle)]:
+runtime.gopark(0x60ffc0?, 0x1?, 0x5d?, 0x10?, 0x0?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00049b738 sp=0xc00049b718 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00049b7c8 sp=0xc00049b738 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00049b7e0 sp=0xc00049b7c8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00049b7e8 sp=0xc00049b7e0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+
+goroutine 25 gp=0xc000493dc0 m=nil [GC worker (idle)]:
+runtime.gopark(0x60ffc0?, 0x1?, 0x22?, 0xef?, 0xc00049bf80?)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/proc.go:435 +0xce fp=0xc00049bf38 sp=0xc00049bf18 pc=0x469bee
+runtime.gcBgMarkWorker(0xc00009c070)
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1423 +0xe9 fp=0xc00049bfc8 sp=0xc00049bf38 pc=0x41d449
+runtime.gcBgMarkStartWorkers.gowrap1()
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x25 fp=0xc00049bfe0 sp=0xc00049bfc8 pc=0x41d325
+runtime.goexit({})
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/asm_amd64.s:1700 +0x1 fp=0xc00049bfe8 sp=0xc00049bfe0 pc=0x4704e1
+created by runtime.gcBgMarkStartWorkers in goroutine 1
+	/home/reuben/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.1.linux-amd64/src/runtime/mgc.go:1339 +0x105
+exit status 2
