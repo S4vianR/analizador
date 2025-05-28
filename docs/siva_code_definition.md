@@ -93,10 +93,10 @@ func main() {
 	elif op == "-" {
 		res: int = int(num1)-int(num2)
 	}
-	elif op "*" {
+	elif op == "*" {
 		res: int = int(num1)*int(num2)
 	}
-	elif op "/" {
+	elif op == "/" {
 		res: int = int(num1)/int(num2)
 	}
 	else {
@@ -111,9 +111,36 @@ func main() {
 ```siv
 # Funciones incluidas en el lenguaje
 
-## Metodo para imprimir en consola
-print(nombre)
+## Método para imprimir en consola
+print(mensaje: str) -> void
 
-## Metodo para conocer la longitud de los "str" y los "arr" -> Arreglos
-lenght(nombre)
-``` 
+## Método para conocer la longitud de strings y arreglos
+length(valor: any) -> int
+
+## Funciones de conversión de tipos
+
+### Convertir a entero
+int(valor: any) -> int
+- Convierte un valor a tipo entero
+- Si el valor es un string, intenta convertirlo a número
+- Si la conversión falla, devuelve 0
+
+### Convertir a flotante
+float(valor: any) -> float
+- Convierte un valor a tipo flotante
+- Si el valor es un string, intenta convertirlo a número
+- Si la conversión falla, devuelve 0.0
+
+### Convertir a string
+str(valor: any) -> str
+- Convierte cualquier valor a su representación en string
+
+### Convertir a booleano
+bool(valor: any) -> bool
+- Devuelve false para: 0, "", false, undefined, null
+- Devuelve true para cualquier otro valor
+
+## Entrada de usuario
+input(prompt: str) -> str
+- Muestra el mensaje de prompt al usuario
+- Devuelve la entrada del usuario como string

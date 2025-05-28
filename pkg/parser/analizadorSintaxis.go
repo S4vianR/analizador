@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 
-	"analizador/tokens"
+	tokens "analizador/tokens"
 )
 
 // TokenInfoSintax represents a token in the JSON file
@@ -19,9 +21,10 @@ type TokenInfoSintax struct {
 
 // Parser represents the syntax analyzer
 type Parser struct {
-	tokens  []TokenInfoSintax
-	current int
-	errors  []string
+	tokens     []TokenInfoSintax
+	current    int
+	errors     []string
+	sourceFile string // Path to the source file being parsed
 }
 
 // NewParser creates a new Parser instance with the given tokens
@@ -29,37 +32,82 @@ func NewParser(tokens []TokenInfoSintax) (*Parser, error) {
 	if len(tokens) == 0 {
 		return nil, fmt.Errorf("no tokens provided")
 	}
+
+	// Filter out comments and whitespace tokens
+	filteredTokens := make([]TokenInfoSintax, 0, len(tokens))
+	for _, token := range tokens {
+		tokenType := token.Type
+		if tokenType != "COMMENT" && tokenType != "WHITESPACE" {
+			filteredTokens = append(filteredTokens, token)
+		}
+	}
+
 	return &Parser{
-		tokens:  tokens,
+		tokens:  filteredTokens,
 		current: 0,
 		errors:  []string{},
 	}, nil
+}
+
+// SetSourceFile sets the path to the source file being parsed
+func (p *Parser) SetSourceFile(path string) {
+	p.sourceFile = path
+}
+
+// getCurrentSourceFile returns the path to the current source file
+func (p *Parser) getCurrentSourceFile() string {
+	return p.sourceFile
 }
 
 // NewParserFromFile creates a new Parser instance from a JSON file containing tokens.
 // It reads the file, parses the JSON data, and returns a new Parser instance.
 // If there's an error reading or parsing the file, it returns an error.
 func NewParserFromFile(filename string) (*Parser, error) {
-	fmt.Printf("Reading tokens from file: %s\n", filename)
-	
-	// Read the JSON file
+	// Read the file
 	data, err := os.ReadFile(filename)
 	if err != nil {
-		return nil, fmt.Errorf("error reading file %s: %v", filename, err)
+		return nil, fmt.Errorf("error reading file %s: %w", filename, err)
 	}
 
-	// Parse the JSON data into a slice of TokenInfoSintax
-	var tokens []TokenInfoSintax
-	if err := json.Unmarshal(data, &tokens); err != nil {
-		return nil, fmt.Errorf("error parsing JSON from %s: %v", filename, err)
+	// Unmarshal the JSON data into a slice of RawToken
+	var rawTokens []RawToken
+	if err := json.Unmarshal(data, &rawTokens); err != nil {
+		return nil, fmt.Errorf("error parsing JSON: %w", err)
 	}
 
-	// Create and return a new Parser instance
-	return &Parser{
+	// Convert RawToken slice to TokenInfoSintax slice
+	tokens := make([]TokenInfoSintax, 0, len(rawTokens))
+	for _, rt := range rawTokens {
+		// Skip comments and whitespace tokens during parsing
+		tokenType := rt.Type
+		if tokenType == "COMMENT" || tokenType == "WHITESPACE" {
+			continue
+		}
+
+		tokens = append(tokens, TokenInfoSintax{
+			Type:    rt.Type,
+			Lexeme:  rt.Lexeme,
+			Literal: rt.Literal,
+			Line:    rt.Line,
+			Column:  rt.Column,
+		})
+	}
+
+	if len(tokens) == 0 {
+		return nil, fmt.Errorf("no valid tokens found in file %s", filename)
+	}
+
+	// Create a new parser with the filtered tokens
+	parser := &Parser{
 		tokens:  tokens,
 		current: 0,
 		errors:  []string{},
-	}, nil
+	}
+
+	// Set the source file path for better error messages
+	parser.SetSourceFile(filename)
+
+	return parser, nil
 }
 
 // RawToken represents the token structure from the lexer output
@@ -71,424 +119,877 @@ type RawToken struct {
 	Column  int         `json:"column"`
 }
 
-// Parse starts the syntax analysis
-func (p *Parser) Parse() error {
-	fmt.Println("Starting syntax analysis...")	
-	// Start with the program rule
-	p.program()
+// Parse starts the syntax analysis and returns the parsed program AST
+func (p *Parser) Parse() (interface{}, error) {
+	// Start parsing from the first token
+	p.current = 0
+	p.errors = p.errors[:0] // Clear any previous errors
 
+	// Parse the entire program
+	program := p.program()
+
+	// If we have any errors, return the first one
 	if len(p.errors) > 0 {
-		fmt.Printf("Found %d syntax errors:\n", len(p.errors))
-		for i, err := range p.errors {
-			fmt.Printf("%d. %s\n", i+1, err)
-		}
-		return fmt.Errorf("found %d syntax errors", len(p.errors))
+		return nil, fmt.Errorf("syntax error: %s", p.errors[0])
 	}
 
 	fmt.Println("Syntax analysis completed successfully")
-	return nil
+	return program, nil
 }
 
 // skipComments advances past any comment tokens
 func (p *Parser) skipComments() {
-    for !p.isAtEnd() && p.peek().Type == string(tokens.TOKEN_COMMENT) {
+    for !p.isAtEnd() && p.peek().Type == tokens.TOKEN_COMMENT.String() {
         p.advance()
     }
 }
 
 // program -> declaration*
-func (p *Parser) program() {
+func (p *Parser) program() interface{} {
+	// Skip any leading comments
+	p.skipComments()
+
+	// Parse all declarations in the program
+	var declarations []interface{}
 	for !p.isAtEnd() {
-		if p.check(tokens.TOKEN_COMMENT) {
-			p.skipComments()
-			continue
+		// Skip any comments between declarations
+		p.skipComments()
+		if p.isAtEnd() {
+			break
 		}
-		p.declaration()
+
+		// Parse the next declaration
+		if decl := p.declaration(); decl != nil {
+			declarations = append(declarations, decl)
+		}
+
+		// Skip any comments after the declaration
+		p.skipComments()
+	}
+
+	// Return the program AST
+	return map[string]interface{}{
+		"type":         "program",
+		"declarations": declarations,
 	}
 }
 
 // declaration -> funcDecl | varDecl | statement
-func (p *Parser) declaration() {
-	switch {
-	case p.match(tokens.TOKEN_RESERVED_FUNC):
-		p.function()
-	case p.match(tokens.TOKEN_RESERVED_VAR, tokens.TOKEN_RESERVED_CONST):
-		p.varDeclaration()
-	default:
-		p.statement()
+func (p *Parser) declaration() interface{} {
+	p.skipComments()
+	if p.isAtEnd() {
+		return nil
 	}
+
+	// Check for function declaration
+	if p.match(tokens.TOKEN_FUNC) {
+		return p.function()
+	}
+
+	// Check for variable/constant declaration
+	if p.match(tokens.TOKEN_VAR) || p.match(tokens.TOKEN_CONST) {
+		return p.varDeclaration()
+	}
+
+	// Otherwise, parse as a statement
+	return p.statement()
 }
 
 // function -> "func" IDENTIFIER "(" parameters? ")" block
-func (p *Parser) function() {
+func (p *Parser) function() interface{} {
 	if !p.match(tokens.TOKEN_IDENTIFIER) {
-		p.error("Se esperaba un nombre de función")
-		return
+		p.error("Expected function name")
+		return nil
 	}
+	name := p.previous()
 
 	if !p.match(tokens.TOKEN_LPAREN) {
-		p.error("Se esperaba '(' después del nombre de la función")
-		return
+		p.error("Expected '(' after function name")
+		return nil
 	}
 
+	// Parse parameters if they exist
+	params := []map[string]interface{}{}
 	if !p.check(tokens.TOKEN_RPAREN) {
-		p.parameters()
+		params = p.parameters()
 	}
 
 	if !p.match(tokens.TOKEN_RPAREN) {
-		p.error("Se esperaba ')' después de los parámetros")
-		return
+		p.error("Expected ')' after parameters")
+		return nil
 	}
 
-	p.block()
+	// Parse function body
+	body := p.block()
+	if body == nil {
+		p.error("Expected function body")
+		return nil
+	}
+
+	// Return the function declaration
+	return map[string]interface{}{
+		"type":   "function_declaration",
+		"name":   name.Lexeme,
+		"params": params,
+		"body":   body,
+	}
 }
 
 // parameters -> IDENTIFIER ":" type ("," IDENTIFIER ":" type)*
-func (p *Parser) parameters() {
+func (p *Parser) parameters() []map[string]interface{} {
+	params := []map[string]interface{}{}
+	
 	for {
 		if !p.match(tokens.TOKEN_IDENTIFIER) {
-			p.error("Se esperaba un identificador de parámetro")
-			return
+			p.error("Expected parameter name")
+			return params
 		}
+		name := p.previous()
 
 		if !p.match(tokens.TOKEN_COLON) {
-			p.error("Se esperaba ':' después del nombre del parámetro")
-			return
+			p.error("Expected ':' after parameter name")
+			return params
 		}
 
 		if !p.isType() {
-			p.error("Tipo de parámetro inválido")
-			return
+			p.error("Expected parameter type")
+			return params
 		}
-		p.advance()
+		paramType := p.previous()
 
+		// Add the parameter to the list
+		params = append(params, map[string]interface{}{
+			"name": name.Lexeme,
+			"type": paramType.Lexeme,
+		})
+
+		// If there's no comma, we're done
 		if !p.match(tokens.TOKEN_COMMA) {
 			break
 		}
 	}
+
+	return params
 }
 
 // varDeclaration -> ("var" | "const") IDENTIFIER ":" type ("=" expression)? ";"
-func (p *Parser) varDeclaration() {
-	if !p.match(tokens.TOKEN_IDENTIFIER) {
-		p.error("Se esperaba un identificador de variable")
-		return
+func (p *Parser) varDeclaration() interface{} {
+	// Get the declaration type (var or const)
+	declToken := p.previous()
+	isConst := declToken.Lexeme == "const"
+
+	// Get the variable name
+	if p.isAtEnd() {
+		p.error("Expected identifier after '" + declToken.Lexeme + "'")
+		return nil
 	}
 
+	if !p.match(tokens.TOKEN_IDENTIFIER) {
+		p.error(fmt.Sprintf("Expected variable name after '%s', got: %s", 
+			declToken.Lexeme, p.peek().Lexeme))
+		return nil
+	}
+	name := p.previous()
+
+	// Get the type annotation
 	if !p.match(tokens.TOKEN_COLON) {
-		p.error("Se esperaba ':' después del nombre de la variable")
-		return
+		p.error(fmt.Sprintf("Expected ':' after variable name '%s'", name.Lexeme))
+		return nil
 	}
 
 	if !p.isType() {
-		p.error("Tipo de variable inválido")
-		return
+		p.error(fmt.Sprintf("Expected type after ':', got: %s", p.peek().Lexeme))
+		return nil
 	}
-	p.advance()
+	typeToken := p.previous()
 
-	// Optional initialization
+	// Check for optional initialization
+	var initializer interface{}
 	if p.match(tokens.TOKEN_ASSIGN) {
-		p.expression()
+		// Parse the expression
+		if p.isAtEnd() {
+			p.error("Expected expression after '='")
+			return nil
+		}
+		initializer = p.expression()
+		if initializer == nil {
+			p.error("Expected expression after '='")
+			return nil
+		}
+	} else if isConst {
+		p.error(fmt.Sprintf("Constant '%s' must be initialized", name.Lexeme))
+		return nil
 	}
 
+	// Expect a semicolon
 	if !p.match(tokens.TOKEN_SEMICOLON) {
-		p.error("Se esperaba ';' después de la declaración de variable")
+		p.error(fmt.Sprintf("Expected ';' after variable declaration '%s'", name.Lexeme))
+		return nil
+	}
+
+	// Return the variable declaration
+	return map[string]interface{}{
+		"type":        "variable_declaration",
+		"declaration": declToken.Lexeme,
+		"name":        name.Lexeme,
+		"var_type":    typeToken.Lexeme,
+		"initializer": initializer,
 	}
 }
 
-// statement -> exprStmt | ifStmt | forStmt | returnStmt | block | printStmt
-func (p *Parser) statement() {
+// statement handles different types of statements
+func (p *Parser) statement() interface{} {
+	// Skip any leading comments
+	p.skipComments()
+
 	switch {
-	case p.match(tokens.TOKEN_RESERVED_IF):
-		p.ifStatement()
-	case p.match(tokens.TOKEN_RESERVED_FOR):
-		p.forStatement()
-	case p.match(tokens.TOKEN_RESERVED_RETURN):
-		p.returnStatement()
-	case p.match(tokens.TOKEN_RESERVED_PRINT):
-		p.printStatement()
+	case p.match(tokens.TOKEN_PRINT):
+		stmt := p.printStatement()
+		if stmt == nil {
+			return nil
+		}
+		return stmt
+	case p.match(tokens.TOKEN_RETURN):
+		stmt := p.returnStatement()
+		if stmt == nil {
+			return nil
+		}
+		return stmt
+	case p.match(tokens.TOKEN_IF):
+		stmt := p.ifStatement()
+		if stmt == nil {
+			return nil
+		}
+		return stmt
+	case p.match(tokens.TOKEN_WHILE):
+		stmt := p.whileStatement()
+		if stmt == nil {
+			return nil
+		}
+		return stmt
+	case p.match(tokens.TOKEN_FOR):
+		stmt := p.forStatement()
+		if stmt == nil {
+			return nil
+		}
+		return stmt
 	case p.match(tokens.TOKEN_LBRACE):
-		p.block()
+		block := p.block()
+		if block == nil {
+			return nil
+		}
+		return block
 	default:
-		p.expressionStatement()
+		exprStmt := p.expressionStatement()
+		if exprStmt == nil {
+			return nil
+		}
+		return exprStmt
 	}
 }
 
 // ifStmt -> "if" expression block ("elif" expression block)* ("else" block)?
-func (p *Parser) ifStatement() {
-	p.expression()
-	p.block()
-
-	// Zero or more elifs
-	for p.match(tokens.TOKEN_RESERVED_ELIF) {
-		p.expression()
-		p.block()
+func (p *Parser) ifStatement() interface{} {
+	if !p.match(tokens.TOKEN_IF) {
+		p.error("Expected 'if' keyword")
+		return
 	}
 
-	// Optional else
-	if p.match(tokens.TOKEN_RESERVED_ELSE) {
-		p.block()
+	// Parse the condition
+	condition := p.expression()
+	if condition == nil {
+		p.error("expected condition after 'if'")
+		return
+	}
+
+	// Parse the then branch
+	thenBranch := p.block()
+	if thenBranch == nil {
+		p.error("Expected block after 'if' condition")
+		return
+	}
+
+	// Handle 'elif' branches
+	var elifBranches []map[string]interface{}
+	for p.match(tokens.TOKEN_ELIF) {
+		elifCondition := p.expression()
+		if elifCondition == nil {
+			p.error("expected condition after 'elif'")
+			return
+		}
+
+		elifBranch := p.block()
+		if elifBranch == nil {
+			p.error("expected block after 'elif' condition")
+			return
+		}
+
+		elifBranches = append(elifBranches, map[string]interface{}{
+			"condition": elifCondition,
+			"branch":    elifBranch,
+		})
+	}
+
+	// Handle 'else' branch
+	var elseBranch interface{}
+	if p.match(tokens.TOKEN_ELSE) {
+		elseBranch = p.block()
+		if elseBranch == nil {
+			p.error("expected block after 'else'")
+			return
+		}
+	}
+
+	// Build the if statement
+	_ = map[string]interface{}{
+		"type":         "if_statement",
+		"condition":    condition,
+		"then_branch":  thenBranch,
+		"elif_branches": elifBranches,
+		"else_branch":  elseBranch,
 	}
 }
 
 // forStmt -> "for" "var" IDENTIFIER ":" "int" "=" expression "in" "range" "(" expression ")" block
 func (p *Parser) forStatement() {
-	if !p.match(tokens.TOKEN_RESERVED_VAR) {
-		p.error("Se esperaba 'var' en la declaración del bucle for")
+	if !p.match(tokens.TOKEN_FOR) {
+		p.error("Expected 'for'")
+		return
+	}
+
+	if !p.match(tokens.TOKEN_VAR) {
+		p.error("Expected 'var' after 'for'")
 		return
 	}
 
 	if !p.match(tokens.TOKEN_IDENTIFIER) {
-		p.error("Se esperaba un identificador en el bucle for")
+		p.error("Expected variable identifier")
 		return
 	}
+	varName := p.previous()
 
 	if !p.match(tokens.TOKEN_COLON) {
-		p.error("Se esperaba ':' después del identificador en el bucle for")
+		p.error("Expected ':' after identifier")
 		return
 	}
 
-	if !p.match(tokens.TOKEN_RESERVED_INT) {
-		p.error("Se esperaba 'int' como tipo en el bucle for")
+	if !p.match(tokens.TOKEN_INT) {
+		p.error("Expected 'int' as variable type")
 		return
 	}
 
 	if !p.match(tokens.TOKEN_ASSIGN) {
-		p.error("Se esperaba '=' en la inicialización del bucle for")
+		p.error("Expected '=' after type")
 		return
 	}
 
-	p.expression()
-
-	if !p.match(tokens.TOKEN_RESERVED_IN) {
-		p.error("Se esperaba 'in' en el bucle for")
+	initializer := p.expression()
+	if initializer == nil {
+		p.error("Expected initializer expression")
 		return
 	}
 
-	if !p.match(tokens.TOKEN_RESERVED_RANGE) {
-		p.error("Se esperaba 'range' en el bucle for")
+	if !p.match(tokens.TOKEN_IN) {
+		p.error("Expected 'in' after expression")
+		return
+	}
+
+	if !p.match(tokens.TOKEN_RANGE) {
+		p.error("Expected 'range' after 'in'")
 		return
 	}
 
 	if !p.match(tokens.TOKEN_LPAREN) {
-		p.error("Se esperaba '(' después de 'range'")
+		p.error("Expected '(' after 'range'")
 		return
 	}
 
-	p.expression()
+	rangeExpr := p.expression()
+	if rangeExpr == nil {
+		p.error("Expected range expression")
+		return
+	}
 
 	if !p.match(tokens.TOKEN_RPAREN) {
-		p.error("Se esperaba ')' después de la expresión de rango")
+		p.error("Expected ')' after range expression")
 		return
 	}
 
-	p.block()
+	body := p.block()
+	if body == nil {
+		p.error("Expected loop body")
+		return
+	}
+
+	// Return the for loop AST node
+	_ = map[string]interface{}{
+		"type":       "for_loop",
+		"variable":   varName.Lexeme,
+		"initializer": initializer,
+		"range_expr": rangeExpr,
+		"body":       body,
+	}
 }
 
 // returnStmt -> "return" expression? ";"
 func (p *Parser) returnStatement() {
+	if !p.match(tokens.TOKEN_RETURN) {
+		p.error("Expected 'return' keyword")
+		return
+	}
+
+	var value interface{}
 	if !p.check(tokens.TOKEN_SEMICOLON) {
-		p.expression()
+		value = p.expression()
+		if value == nil {
+			p.error("expected expression after 'return'")
+			return
+		}
 	}
 
 	if !p.match(tokens.TOKEN_SEMICOLON) {
-		p.error("Se esperaba ';' después del valor de retorno")
+		p.error("Expected ';' after return value")
+		return
+	}
+
+	// Return the return statement
+	_ = map[string]interface{}{
+		"type":  "return_statement",
+		"value": value,
 	}
 }
 
 // printStmt -> "print" "(" expression ")" ";"
 func (p *Parser) printStatement() {
-	if !p.match(tokens.TOKEN_LPAREN) {
-		p.error("Se esperaba '(' después de 'print'")
+	if !p.match(tokens.TOKEN_PRINT) {
+		p.error("Expected 'print' keyword")
 		return
 	}
 
-	p.expression()
+	if !p.match(tokens.TOKEN_LPAREN) {
+		p.error("Expected '(' after 'print'")
+		return
+	}
+
+	expr := p.expression()
+	if expr == nil {
+		p.error("expected expression in 'print' statement")
+		return
+	}
 
 	if !p.match(tokens.TOKEN_RPAREN) {
-		p.error("Se esperaba ')' después de la expresión en 'print'")
+		p.error("Expected ')' after expression in 'print'")
 		return
 	}
 
 	if !p.match(tokens.TOKEN_SEMICOLON) {
-		p.error("Se esperaba ';' después de 'print'")
+		p.error("Expected ';' after 'print' statement")
+		return
+	}
+
+	// Return the print statement
+	_ = map[string]interface{}{
+		"type":       "print_statement",
+		"expression": expr,
 	}
 }
 
 // block -> "{" declaration* "}"
-func (p *Parser) block() {
-	for !p.check(tokens.TOKEN_RBRACE) && !p.isAtEnd() {
-		p.declaration()
+func (p *Parser) block() interface{} {
+	if !p.match(tokens.TOKEN_LEFT_BRACE) {
+		p.error("Expected '{' before block")
+		return nil
 	}
 
-	if !p.match(tokens.TOKEN_RBRACE) {
-		p.error("Se esperaba '}' al final del bloque")
+	var statements []interface{}
+	for !p.check(tokens.TOKEN_RIGHT_BRACE) && !p.isAtEnd() {
+		stmt := p.declaration()
+		if stmt != nil {
+			statements = append(statements, stmt)
+		}
+	}
+
+	if !p.match(tokens.TOKEN_RIGHT_BRACE) {
+		p.error("Expected '}' after block")
+		return nil
+	}
+
+	return map[string]interface{}{
+		"type":       "block",
+		"statements": statements,
 	}
 }
 
-// expressionStmt -> expression ";"
-func (p *Parser) expressionStatement() {
-	p.expression()
-	if !p.match(tokens.TOKEN_SEMICOLON) {
-		p.error("Se esperaba ';' después de la expresión")
+// expressionStatement handles expression statements
+func (p *Parser) expressionStatement() interface{} {
+	expr := p.expression()
+	if expr == nil {
+		return nil
+	}
+	
+	if p.check(tokens.TOKEN_SEMICOLON) {
+		p.advance()
+	}
+	
+	return map[string]interface{}{
+		"type":       "expression_statement",
+		"expression": expr,
 	}
 }
 
-// expression -> assignment
-func (p *Parser) expression() {
-	p.assignment()
+// expression handles expressions
+func (p *Parser) expression() interface{} {
+	expr := p.assignment()
+	if expr == nil {
+		return nil
+	}
+	return expr
 }
 
-// assignment -> IDENTIFIER "=" assignment | logic_or
-func (p *Parser) assignment() {
-	p.logicOr()
+// assignment handles assignment expressions
+func (p *Parser) assignment() interface{} {
+	expr := p.or()
+	if expr == nil {
+		return nil
+	}
 
 	if p.match(tokens.TOKEN_ASSIGN) {
-		p.assignment()
+		equals := p.previous()
+		value := p.assignment()
+
+		if value == nil {
+			p.error("Expected expression after '='")
+			return nil
+		}
+
+		if ident, ok := expr.(map[string]interface{}); ok && ident["type"] == "variable" {
+			return map[string]interface{}{
+				"type":   "assignment",
+				"name":   ident["name"],
+				"value":  value,
+				"line":   equals.Line,
+				"column": equals.Column,
+			}
+		}
+
+		p.error("Invalid assignment target")
 	}
+
+	return expr
 }
 
 // logic_or -> logic_and ("or" logic_and)*
-func (p *Parser) logicOr() {
-	p.logicAnd()
+func (p *Parser) logicOr() interface{} {
+	left := p.logicAnd()
 
 	for p.match(tokens.TOKEN_OR) {
-		p.logicAnd()
+		operator := p.previous()
+		right := p.logicAnd()
+		if right == nil {
+			p.error("expected expression after 'or'")
+			return nil
+		}
+		left = map[string]interface{}{
+			"type":     "binary",
+			"left":     left,
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
 	}
+
+	return left
 }
 
 // logic_and -> equality ("and" equality)*
-func (p *Parser) logicAnd() {
-	p.equality()
+func (p *Parser) logicAnd() interface{} {
+	left := p.equality()
 
 	for p.match(tokens.TOKEN_AND) {
-		p.equality()
+		operator := p.previous()
+		right := p.equality()
+		if right == nil {
+			p.error("expected expression after 'and'")
+			return nil
+		}
+		left = map[string]interface{}{
+			"type":     "logical",
+			"left":     left,
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
 	}
+
+	return left
 }
 
-// equality -> comparison ( ("!=" | "==") comparison )*
-func (p *Parser) equality() {
-	p.comparison()
-
-	for p.match(tokens.TOKEN_NOT_EQUAL, tokens.TOKEN_EQUAL) {
-		p.comparison()
+// equality handles equality and inequality expressions
+func (p *Parser) equality() interface{} {
+	expr := p.comparison()
+	if expr == nil {
+		return nil
 	}
+
+	for p.match(tokens.TOKEN_EQUAL, tokens.TOKEN_NOT_EQUAL) {
+		operator := p.previous()
+		right := p.comparison()
+		if right == nil {
+			p.error("expected expression after operator")
+			return nil
+		}
+		expr = map[string]interface{}{
+			"type":     "binary",
+			"left":     expr,
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
+	}
+
+	return expr
 }
 
-// comparison -> term ( (">" | ">=" | "<" | "<=") term )*
-func (p *Parser) comparison() {
-	p.term()
+// comparison handles comparison expressions
+func (p *Parser) comparison() interface{} {
+	expr := p.term()
+	if expr == nil {
+		return nil
+	}
 
 	for p.match(tokens.TOKEN_GREATER, tokens.TOKEN_GREATER_EQUAL, tokens.TOKEN_LESS, tokens.TOKEN_LESS_EQUAL) {
-		p.term()
+		operator := p.previous()
+		right := p.term()
+		if right == nil {
+			p.error("expected expression after operator")
+			return nil
+		}
+		expr = map[string]interface{}{
+			"type":     "binary",
+			"left":     expr,
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
 	}
+
+	return expr
 }
 
-// term -> factor ( ("-" | "+") factor )*
-func (p *Parser) term() {
-	p.factor()
-
-	for p.match(tokens.TOKEN_MINUS, tokens.TOKEN_PLUS) {
-		p.factor()
+// term handles addition and subtraction
+func (p *Parser) term() interface{} {
+	expr := p.factor()
+	if expr == nil {
+		return nil
 	}
+
+	for p.match(tokens.TOKEN_PLUS, tokens.TOKEN_MINUS) {
+		operator := p.previous()
+		right := p.factor()
+		if right == nil {
+			p.error("expected expression after operator")
+			return nil
+		}
+		expr = map[string]interface{}{
+			"type":     "binary",
+			"left":     expr,
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
+	}
+
+	return expr
 }
 
-// factor -> unary ( ("/" | "*" | "%") unary )*
-func (p *Parser) factor() {
-	p.unary()
-
-	for p.match(tokens.TOKEN_DIVIDE, tokens.TOKEN_MULTIPLY, tokens.TOKEN_MODULO) {
-		p.unary()
+// factor handles multiplication, division, and modulo
+func (p *Parser) factor() interface{} {
+	expr := p.unary()
+	if expr == nil {
+		return nil
 	}
+
+	for p.match(tokens.TOKEN_MULTIPLY, tokens.TOKEN_DIVIDE, tokens.TOKEN_MODULO) {
+		operator := p.previous()
+		right := p.unary()
+		if right == nil {
+			p.error("expected expression after operator")
+			return nil
+		}
+		expr = map[string]interface{}{
+			"type":     "binary",
+			"left":     expr,
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
+	}
+
+	return expr
 }
 
-// unary -> ("!" | "-") unary | call
-func (p *Parser) unary() {
-	if p.match(tokens.TOKEN_NOT, tokens.TOKEN_MINUS) {
-		p.unary()
-	} else {
-		p.call()
+// unary handles unary operators
+func (p *Parser) unary() interface{} {
+	if p.match(tokens.TOKEN_MINUS, tokens.TOKEN_NOT) {
+		operator := p.previous()
+		right := p.unary()
+		if right == nil {
+			p.error("expected expression after operator")
+			return nil
+		}
+		return map[string]interface{}{
+			"type":     "unary",
+			"operator": operator.Lexeme,
+			"right":    right,
+		}
 	}
+
+	return p.call()
 }
 
-// call -> primary ( "(" arguments? ")" )*
-func (p *Parser) call() {
-	p.primary()
+// call handles function calls
+func (p *Parser) call() interface{} {
+	expr := p.primary()
+	if expr == nil {
+		return nil
+	}
 
 	for {
 		if p.match(tokens.TOKEN_LPAREN) {
+			// Handle function call
+			var args []interface{}
 			if !p.check(tokens.TOKEN_RPAREN) {
-				p.arguments()
+				args = p.arguments()
+				if args == nil {
+					return nil
+				}
 			}
 
 			if !p.match(tokens.TOKEN_RPAREN) {
-				p.error("Se esperaba ')' después de los argumentos")
-				return
+				p.error("expected ')' after arguments")
+				return nil
+			}
+
+			expr = map[string]interface{}{
+				"type":      "call",
+				"callee":    expr,
+				"arguments": args,
 			}
 		} else {
 			break
 		}
 	}
+
+	return expr
 }
 
-// arguments -> expression ("," expression)*
-func (p *Parser) arguments() {
+// arguments handles function call arguments
+func (p *Parser) arguments() []interface{} {
+	var args []interface{}
+
 	for {
-		p.expression()
+		if len(args) >= 255 {
+			p.error("can't have more than 255 arguments")
+			return nil
+		}
+
+		expr := p.expression()
+		if expr == nil {
+			return nil
+		}
+		args = append(args, expr)
+
 		if !p.match(tokens.TOKEN_COMMA) {
 			break
 		}
 	}
+
+	return args
 }
 
-// primary -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" | IDENTIFIER
-func (p *Parser) primary() {
-	switch {
-	case p.match(tokens.TOKEN_NUMBER, tokens.TOKEN_STRING):
-		// Literals are handled by the lexer
-		return
-	case p.match(tokens.TOKEN_RESERVED_BOOL, tokens.TOKEN_RESERVED_UNDEFINED):
-		// Boolean and undefined literals
-		return
-	case p.match(tokens.TOKEN_LPAREN):
-		p.expression()
+// primary handles primary expressions
+func (p *Parser) primary() interface{} {
+	if p.match(tokens.TOKEN_NUMBER, tokens.TOKEN_STRING) {
+		token := p.previous()
+		return map[string]interface{}{
+			"type":  "literal",
+			"value": token.Literal,
+		}
+	}
+
+	if p.match(tokens.TOKEN_TRUE) {
+		return map[string]interface{}{
+			"type":  "literal",
+			"value": true,
+		}
+	}
+
+	if p.match(tokens.TOKEN_FALSE) {
+		return map[string]interface{}{
+			"type":  "literal",
+			"value": false,
+		}
+	}
+
+	if p.match(tokens.TOKEN_NIL) {
+		return map[string]interface{}{
+			"type":  "literal",
+			"value": nil,
+		}
+	}
+
+	if p.match(tokens.TOKEN_IDENTIFIER) {
+		token := p.previous()
+		name := token.Lexeme
+		
+		// Check if it's a type conversion
+		if p.check(tokens.TOKEN_LPAREN) {
+			switch name {
+			case "int", "float", "str", "bool":
+				p.advance() // Consume the LPAREN
+				expr := p.expression()
+				if expr == nil {
+					p.error("expected expression in type conversion")
+					return nil
+				}
+
+				if !p.match(tokens.TOKEN_RPAREN) {
+					p.error("expected ')' after type conversion")
+					return nil
+				}
+
+				return map[string]interface{}{
+					"type":    "type_conversion",
+					"to_type": name,
+					"expr":    expr,
+				}
+			}
+		}
+
+		return map[string]interface{}{
+			"type": "variable",
+			"name": name,
+		}
+	}
+
+	if p.match(tokens.TOKEN_LPAREN) {
+		expr := p.expression()
+		if expr == nil {
+			return nil
+		}
+
 		if !p.match(tokens.TOKEN_RPAREN) {
-			p.error("Se esperaba ')' después de la expresión")
+			p.error("expected ')' after expression")
+			return nil
 		}
-	case p.match(tokens.TOKEN_IDENTIFIER):
-		// Identifier
-		return
-	default:
-		p.error("Se esperaba una expresión")
-	}
-}
 
-// Helper methods
-
-// match checks if the current token matches any of the given token types and consumes it if it does
-func (p *Parser) match(types ...tokens.TokenType) bool {
-	// Skip any comments before checking for a match
-	p.skipComments()
-	
-	for _, t := range types {
-		if p.check(t) {
-			fmt.Printf("    [MATCH] Matched token type: %s, lexeme: '%s'\n", t, p.peek().Lexeme)
-			p.advance()
-			// Skip any comments after a match
-			p.skipComments()
-			return true
+		return map[string]interface{}{
+			"type": "grouping",
+			"expr": expr,
 		}
 	}
-	return false
+
+	p.error("expected expression")
+	return nil
 }
 
-// check checks if the current token is of the given token type
+// check checks if the current token matches the given token type
 func (p *Parser) check(tokenType tokens.TokenType) bool {
 	if p.isAtEnd() {
-		return false
-	}
-	// Skip comments when checking token types
-	if p.peek().Type == tokens.TOKEN_COMMENT.String() {
 		return false
 	}
 	return p.peek().Type == tokenType.String()
@@ -511,7 +1012,7 @@ func (p *Parser) isAtEnd() bool {
 // peek returns the current token without consuming it
 func (p *Parser) peek() TokenInfoSintax {
 	if p.isAtEnd() {
-		return TokenInfoSintax{Type: tokens.TOKEN_EOF.String()}
+		return TokenInfoSintax{Type: tokens.TOKEN_EOF.String(), Lexeme: "", Literal: nil, Line: 0, Column: 0}
 	}
 	return p.tokens[p.current]
 }
@@ -519,9 +1020,20 @@ func (p *Parser) peek() TokenInfoSintax {
 // previous returns the most recently consumed token
 func (p *Parser) previous() TokenInfoSintax {
 	if p.current == 0 {
-		return TokenInfoSintax{Type: tokens.TOKEN_EOF.String()}
+		return TokenInfoSintax{Type: tokens.TOKEN_EOF.String(), Lexeme: "", Literal: nil, Line: 0, Column: 0}
 	}
 	return p.tokens[p.current-1]
+}
+
+// match checks if the current token matches any of the given token types
+func (p *Parser) match(types ...tokens.TokenType) bool {
+	for _, t := range types {
+		if p.check(t) {
+			p.advance()
+			return true
+		}
+	}
+	return false
 }
 
 // isType checks if the current token is a valid type
@@ -537,7 +1049,29 @@ func (p *Parser) isType() bool {
 		tokenType == tokens.TOKEN_RESERVED_UNDEFINED.String()
 }
 
-// error adds an error message at the current token
+// synchronize discards tokens until we find a statement boundary
+func (p *Parser) synchronize() {
+	p.advance()
+
+	for !p.isAtEnd() {
+		// If we just had a semicolon, we're at a statement boundary
+		if p.previous().Type == "SEMICOLON" {
+			return
+		}
+
+		// Check for statement-starting keywords
+		switch p.peek().Type {
+		case "FUNC", "VAR", "CONST",
+			"FOR", "IF", "WHILE",
+			"PRINT", "RETURN":
+			return
+		}
+
+		p.advance()
+	}
+}
+
+// error adds an error message at the current token with context
 func (p *Parser) error(message string) {
 	token := p.peek()
 	line := token.Line
@@ -550,11 +1084,39 @@ func (p *Parser) error(message string) {
 		column = prev.Column + len(prev.Lexeme) // Position after the last token
 	}
 
-	errMsg := fmt.Sprintf("[línea %d, columna %d] Error", line, column)
-	if token.Lexeme != "" {
-		errMsg += fmt.Sprintf(" en '%s'", token.Lexeme)
+	// Get the line of code where the error occurred
+	var lineContent string
+	var indicator string
+	
+	// Try to read the source file to get the line content
+	sourceFile := p.getCurrentSourceFile()
+	if sourceFile != "" {
+		if content, err := os.ReadFile(sourceFile); err == nil {
+			lines := strings.Split(string(content), "\n")
+			if line > 0 && line <= len(lines) {
+				lineContent = strings.TrimSpace(lines[line-1])
+				indicator = strings.Repeat(" ", column-1) + "^"
+			}
+		}
 	}
-	errMsg += fmt.Sprintf(": %s", message)
+
+	errMsg := fmt.Sprintf("\nError en línea %d, columna %d:\n", line, column)
+	
+	if lineContent != "" {
+		errMsg += fmt.Sprintf("  %s\n  %s\n", lineContent, indicator)
+	}
+	
+	errMsg += fmt.Sprintf("  Error: %s\n", message)
+
+	// Add context about what was expected if this is a syntax error
+	switch message {
+	case "Se esperaba ';' después de la expresión":
+		errMsg += "  Nota: Asegúrate de terminar las expresiones con punto y coma (;)"
+	case "Se esperaba ')' después de la expresión":
+		errMsg += "  Nota: Revisa que todos los paréntesis estén balanceados"
+	case "Se esperaba '}' al final del bloque":
+		errMsg += "  Nota: Asegúrate de cerrar todos los bloques con '}'"
+	}
 
 	p.errors = append(p.errors, errMsg)
 }

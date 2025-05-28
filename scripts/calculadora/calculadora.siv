@@ -1,5 +1,5 @@
 func main() {
-	var res: num = 0;
+	var res: int = 0;
 	var num1: str = input("Ingresa el primer número")
 	var num2: str = input("Ingresa el segundo número")
 	var op: str = input("Ingresa el operador a usar (+,-,*,/)")
@@ -10,16 +10,21 @@ func main() {
 	elif op == "-" {
 		res: int = int(num1)-int(num2)
 	}
-	elif op "*" {
+	elif op == "*" {
 		res: int = int(num1)*int(num2)
 	}
-	elif op "/" {
-		res: int = int(num1)/int(num2)
+	elif op == "/" {
+		if int(num2) == 0 {
+			print("No se puede dividir entre 0")
+			main()
+		} else {
+			res: int = int(num1)/int(num2)
+		}
 	}
 	else {
 		print("Favor de escribir un operador válido, reiniciando...")
 		main()
 	}
 
-	print("El resultado es: " + res)
+	print("El resultado es: " + str(res))
 }

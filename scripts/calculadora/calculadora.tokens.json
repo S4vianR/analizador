@@ -2,459 +2,623 @@
   {
     "type": "FUNC",
     "lexeme": "func",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 1
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "main()",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 6
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 2,
+    "column": 13
   },
   {
     "type": "VAR",
     "lexeme": "var",
-    "line": 0,
-    "column": 0
+    "line": 3,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "res:",
-    "line": 0,
-    "column": 0
+    "lexeme": "res",
+    "line": 3,
+    "column": 6
   },
   {
-    "type": "NUM",
-    "lexeme": "num",
-    "line": 0,
-    "column": 0
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 3,
+    "column": 9
+  },
+  {
+    "type": "INT",
+    "lexeme": "int",
+    "line": 3,
+    "column": 11
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 3,
+    "column": 15
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "0;",
-    "line": 0,
-    "column": 0
+    "line": 3,
+    "column": 17
   },
   {
     "type": "VAR",
     "lexeme": "var",
-    "line": 0,
-    "column": 0
+    "line": 4,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "num1:",
-    "line": 0,
-    "column": 0
+    "lexeme": "num1",
+    "line": 4,
+    "column": 6
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 4,
+    "column": 10
   },
   {
     "type": "STR",
     "lexeme": "str",
-    "line": 0,
-    "column": 0
+    "line": 4,
+    "column": 12
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 4,
+    "column": 16
   },
   {
     "type": "STRING",
     "lexeme": "input(Ingresa el primer número",
     "literal": "input(Ingresa el primer número",
-    "line": 0,
-    "column": 0
+    "line": 4,
+    "column": 19
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 4,
+    "column": 51
   },
   {
     "type": "VAR",
     "lexeme": "var",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "num2:",
-    "line": 0,
-    "column": 0
+    "lexeme": "num2",
+    "line": 5,
+    "column": 6
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 5,
+    "column": 10
   },
   {
     "type": "STR",
     "lexeme": "str",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 12
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 16
   },
   {
     "type": "STRING",
     "lexeme": "input(Ingresa el segundo número",
     "literal": "input(Ingresa el segundo número",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 19
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 5,
+    "column": 52
   },
   {
     "type": "VAR",
     "lexeme": "var",
-    "line": 0,
-    "column": 0
+    "line": 6,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "op:",
-    "line": 0,
-    "column": 0
+    "lexeme": "op",
+    "line": 6,
+    "column": 6
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 6,
+    "column": 8
   },
   {
     "type": "STR",
     "lexeme": "str",
-    "line": 0,
-    "column": 0
+    "line": 6,
+    "column": 10
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 6,
+    "column": 14
   },
   {
     "type": "STRING",
     "lexeme": "input(Ingresa el operador a usar (+,-,*,/)",
     "literal": "input(Ingresa el operador a usar (+,-,*,/)",
-    "line": 0,
-    "column": 0
+    "line": 6,
+    "column": 17
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 6,
+    "column": 60
   },
   {
     "type": "IF",
     "lexeme": "if",
-    "line": 0,
-    "column": 0
+    "line": 8,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "op",
-    "line": 0,
-    "column": 0
+    "line": 8,
+    "column": 5
   },
   {
-    "type": "EQUAL",
-    "lexeme": "==",
-    "line": 0,
-    "column": 0
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 8,
+    "column": 8
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 8,
+    "column": 9
   },
   {
     "type": "STRING",
     "lexeme": "+",
     "literal": "+",
-    "line": 0,
-    "column": 0
+    "line": 8,
+    "column": 12
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 8,
+    "column": 15
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "res:",
-    "line": 0,
-    "column": 0
+    "lexeme": "res",
+    "line": 9,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 9,
+    "column": 6
   },
   {
     "type": "INT",
     "lexeme": "int",
-    "line": 0,
-    "column": 0
+    "line": 9,
+    "column": 8
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 9,
+    "column": 12
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "int(num1)+int(num2)",
-    "line": 0,
-    "column": 0
+    "line": 9,
+    "column": 14
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 10,
+    "column": 2
   },
   {
     "type": "ELIF",
     "lexeme": "elif",
-    "line": 0,
-    "column": 0
+    "line": 11,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "op",
-    "line": 0,
-    "column": 0
+    "line": 11,
+    "column": 7
   },
   {
-    "type": "EQUAL",
-    "lexeme": "==",
-    "line": 0,
-    "column": 0
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 11,
+    "column": 10
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 11,
+    "column": 11
   },
   {
     "type": "STRING",
     "lexeme": "-",
     "literal": "-",
-    "line": 0,
-    "column": 0
+    "line": 11,
+    "column": 14
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 11,
+    "column": 17
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "res:",
-    "line": 0,
-    "column": 0
+    "lexeme": "res",
+    "line": 12,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 12,
+    "column": 6
   },
   {
     "type": "INT",
     "lexeme": "int",
-    "line": 0,
-    "column": 0
+    "line": 12,
+    "column": 8
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 12,
+    "column": 12
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "int(num1)-int(num2)",
-    "line": 0,
-    "column": 0
+    "line": 12,
+    "column": 14
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 13,
+    "column": 2
   },
   {
     "type": "ELIF",
     "lexeme": "elif",
-    "line": 0,
-    "column": 0
+    "line": 14,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "op",
-    "line": 0,
-    "column": 0
+    "line": 14,
+    "column": 7
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 14,
+    "column": 10
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 14,
+    "column": 11
   },
   {
     "type": "STRING",
     "lexeme": "*",
     "literal": "*",
-    "line": 0,
-    "column": 0
+    "line": 14,
+    "column": 14
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 14,
+    "column": 17
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "res:",
-    "line": 0,
-    "column": 0
+    "lexeme": "res",
+    "line": 15,
+    "column": 3
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 15,
+    "column": 6
   },
   {
     "type": "INT",
     "lexeme": "int",
-    "line": 0,
-    "column": 0
+    "line": 15,
+    "column": 8
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 15,
+    "column": 12
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "int(num1)*int(num2)",
-    "line": 0,
-    "column": 0
+    "line": 15,
+    "column": 14
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 16,
+    "column": 2
   },
   {
     "type": "ELIF",
     "lexeme": "elif",
-    "line": 0,
-    "column": 0
+    "line": 17,
+    "column": 2
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "op",
-    "line": 0,
-    "column": 0
+    "line": 17,
+    "column": 7
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 17,
+    "column": 10
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 17,
+    "column": 11
   },
   {
     "type": "STRING",
     "lexeme": "/",
     "literal": "/",
-    "line": 0,
-    "column": 0
+    "line": 17,
+    "column": 14
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 17,
+    "column": 17
+  },
+  {
+    "type": "IF",
+    "lexeme": "if",
+    "line": 18,
+    "column": 3
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "res:",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "INT",
-    "lexeme": "int",
-    "line": 0,
-    "column": 0
+    "lexeme": "int(num2)",
+    "line": 18,
+    "column": 6
   },
   {
     "type": "ASSIGN",
     "lexeme": "=",
-    "line": 0,
-    "column": 0
+    "line": 18,
+    "column": 16
   },
   {
-    "type": "IDENTIFIER",
-    "lexeme": "int(num1)/int(num2)",
-    "line": 0,
-    "column": 0
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 18,
+    "column": 17
   },
   {
-    "type": "RBRACE",
-    "lexeme": "}",
-    "line": 0,
-    "column": 0
-  },
-  {
-    "type": "ELSE",
-    "lexeme": "else",
-    "line": 0,
-    "column": 0
+    "type": "NUMBER",
+    "lexeme": "0",
+    "literal": "0",
+    "line": 18,
+    "column": 19
   },
   {
     "type": "LBRACE",
     "lexeme": "{",
-    "line": 0,
-    "column": 0
+    "line": 18,
+    "column": 21
+  },
+  {
+    "type": "STRING",
+    "lexeme": "print(No se puede dividir entre 0",
+    "literal": "print(No se puede dividir entre 0",
+    "line": 19,
+    "column": 5
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 19,
+    "column": 39
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "main()",
+    "line": 20,
+    "column": 4
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 21,
+    "column": 3
+  },
+  {
+    "type": "ELSE",
+    "lexeme": "else",
+    "line": 21,
+    "column": 5
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 21,
+    "column": 10
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "res",
+    "line": 22,
+    "column": 4
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 22,
+    "column": 7
+  },
+  {
+    "type": "INT",
+    "lexeme": "int",
+    "line": 22,
+    "column": 9
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 22,
+    "column": 13
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "int(num1)/int(num2)",
+    "line": 22,
+    "column": 15
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 23,
+    "column": 3
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 24,
+    "column": 2
+  },
+  {
+    "type": "ELSE",
+    "lexeme": "else",
+    "line": 25,
+    "column": 2
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 25,
+    "column": 7
   },
   {
     "type": "STRING",
     "lexeme": "print(Favor de escribir un operador válido, reiniciando...",
     "literal": "print(Favor de escribir un operador válido, reiniciando...",
-    "line": 0,
-    "column": 0
+    "line": 26,
+    "column": 4
   },
   {
     "type": "RPAREN",
     "lexeme": ")",
-    "line": 0,
-    "column": 0
+    "line": 26,
+    "column": 64
   },
   {
     "type": "IDENTIFIER",
     "lexeme": "main()",
-    "line": 0,
-    "column": 0
+    "line": 27,
+    "column": 3
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 28,
+    "column": 2
   },
   {
     "type": "STRING",
     "lexeme": "print(El resultado es: ",
     "literal": "print(El resultado es: ",
-    "line": 0,
-    "column": 0
+    "line": 30,
+    "column": 3
   },
   {
     "type": "PLUS",
     "lexeme": "+",
-    "line": 0,
-    "column": 0
+    "line": 30,
+    "column": 28
   },
   {
     "type": "IDENTIFIER",
-    "lexeme": "res)",
-    "line": 0,
-    "column": 0
+    "lexeme": "str(res))",
+    "line": 30,
+    "column": 30
   },
   {
     "type": "RBRACE",
     "lexeme": "}",
-    "line": 0,
-    "column": 0
+    "line": 31,
+    "column": 1
   },
   {
     "type": "EOF",
-    "line": 0,
-    "column": 0
+    "line": 31,
+    "column": 1
   }
 ]

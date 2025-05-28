@@ -36,8 +36,8 @@ type Lexer struct {
 
 // Global variables for reserved words
 var (
-	reservedTypes     = []string{"int", "float", "str", "bool", "undefined", "num"}
-	reservedFunctions = []string{"print", "length", "input"}
+	reservedTypes     = []string{"int", "float", "str", "bool", "undefined"}
+	reservedFunctions = []string{"print", "length", "input", "int", "float", "str", "bool"}
 )
 
 // NewLexer creates a new Lexer instance
@@ -79,6 +79,8 @@ func (l *Lexer) ScanTokens() ([]tokens.Token, error) {
 	collector.tokens = append(collector.tokens, tokens.Token{
 		Type:   tokens.TOKEN_EOF,
 		Lexeme: "",
+		Line:   l.lineNumber,
+		Column: 1,
 	})
 
 	l.tokens = collector.tokens
@@ -119,6 +121,7 @@ type TokenFound struct {
 
 // analyzeLine analyzes a single line of source code and adds tokens to the collector
 func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
+	lineNumber := l.lineNumber + 1 // 1-based line numbers for user-friendly reporting
 	// Map of operators to token types
 	operators := map[string]tokens.TokenType{
 		"+":  tokens.TOKEN_PLUS,
@@ -212,6 +215,8 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 					Type:    tokens.TOKEN_STRING,
 					Lexeme:  currentToken.String(),
 					Literal: currentToken.String(),
+					Line:    lineNumber,
+					Column:  i - currentToken.Len() + 1, // +1 for 1-based column
 				})
 				currentToken.Reset()
 				inString = false
@@ -238,16 +243,22 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 					collector.AddToken(tokens.Token{
 						Type:   tokenType,
 						Lexeme: tokenStr,
+						Line:   lineNumber,
+						Column: i - len(tokenStr) + 1, // +1 for 1-based column
 					})
 				} else if _, isOp := operators[tokenStr]; isOp {
 					collector.AddToken(tokens.Token{
 						Type:   operators[tokenStr],
 						Lexeme: tokenStr,
+						Line:   lineNumber,
+						Column: i - len(tokenStr) + 1, // +1 for 1-based column
 					})
 				} else if _, isDelim := delimiters[tokenStr]; isDelim {
 					collector.AddToken(tokens.Token{
 						Type:   delimiters[tokenStr],
 						Lexeme: tokenStr,
+						Line:   lineNumber,
+						Column: i - len(tokenStr) + 1, // +1 for 1-based column
 					})
 				} else {
 					// Try to parse as number
@@ -256,12 +267,16 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 							Type:    tokens.TOKEN_NUMBER,
 							Lexeme:  tokenStr,
 							Literal: tokenStr,
+							Line:    lineNumber,
+							Column:  i - len(tokenStr) + 1, // +1 for 1-based column
 						})
 					} else {
 						// Default to identifier
 						collector.AddToken(tokens.Token{
 							Type:   tokens.TOKEN_IDENTIFIER,
 							Lexeme: tokenStr,
+							Line:   lineNumber,
+							Column: i - len(tokenStr) + 1, // +1 for 1-based column
 						})
 					}
 				}
@@ -277,21 +292,55 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 			collector.AddToken(tokens.Token{
 				Type:   tokens.TOKEN_COMMENT,
 				Lexeme: comment,
+				Line:   lineNumber,
+				Column: i + 1, // +1 for 1-based column
 			})
 			break
 		}
 
 		// Check for operators and delimiters
-		currentToken.WriteByte(ch)
-		tokenStr := currentToken.String()
+		// If we have a colon and it's not part of another operator, process it separately
+		if ch == ':' && (currentToken.Len() == 0 || currentToken.String() != ":") {
+			// If we have a token before the colon, add it first
+			if currentToken.Len() > 0 {
+				tokenStr := currentToken.String()
+				if tokenType, isKeyword := keywords[tokenStr]; isKeyword {
+					collector.AddToken(tokens.Token{
+						Type:   tokenType,
+						Lexeme: tokenStr,
+						Line:   lineNumber,
+						Column: i - len(tokenStr) + 1, // +1 for 1-based column
+					})
+				} else {
+					collector.AddToken(tokens.Token{
+						Type:   tokens.TOKEN_IDENTIFIER,
+						Lexeme: tokenStr,
+						Line:   lineNumber,
+						Column: i - len(tokenStr) + 1, // +1 for 1-based column
+					})
+				}
+				currentToken.Reset()
+			}
+			// Add the colon as a separate token
+			collector.AddToken(tokens.Token{
+				Type:   tokens.TOKEN_COLON,
+				Lexeme: ":",
+				Line:   lineNumber,
+				Column: i + 1, // +1 for 1-based column
+			})
+			continue
+		}
 
 		// Check for multi-character operators first
-		if i+1 < len(line) {
+		if currentToken.Len() > 0 && i+1 < len(line) {
+			tokenStr := currentToken.String()
 			twoCharOp := tokenStr + string(line[i+1])
 			if _, exists := operators[twoCharOp]; exists {
 				collector.AddToken(tokens.Token{
 					Type:   operators[twoCharOp],
 					Lexeme: twoCharOp,
+					Line:   lineNumber,
+					Column: i - len(twoCharOp) + 2, // +1 for 1-based column, +1 because it's a two-char op
 				})
 				currentToken.Reset()
 				i++ // Skip next character since we've processed it
@@ -299,17 +348,24 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 			}
 		}
 
+		currentToken.WriteByte(ch)
+
 		// Check for single-character operators and delimiters
+		tokenStr := currentToken.String()
 		if tokenType, isOp := operators[tokenStr]; isOp {
 			collector.AddToken(tokens.Token{
 				Type:   tokenType,
 				Lexeme: tokenStr,
+				Line:   lineNumber,
+				Column: i - len(tokenStr) + 2, // +1 for 1-based, +1 because we're after the token
 			})
 			currentToken.Reset()
 		} else if delimType, isDelim := delimiters[tokenStr]; isDelim {
 			collector.AddToken(tokens.Token{
 				Type:   delimType,
 				Lexeme: tokenStr,
+				Line:   lineNumber,
+				Column: i - len(tokenStr) + 2, // +1 for 1-based, +1 because we're after the token
 			})
 			currentToken.Reset()
 		}
@@ -318,20 +374,30 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 	// Add any remaining token
 	if currentToken.Len() > 0 {
 		tokenStr := currentToken.String()
+		// Skip empty tokens that might have been added
+		if tokenStr == "" {
+			return
+		}
 		if tokenType, isKeyword := keywords[tokenStr]; isKeyword {
 			collector.AddToken(tokens.Token{
 				Type:   tokenType,
 				Lexeme: tokenStr,
+				Line:   lineNumber,
+				Column: len(line) - len(tokenStr) + 1, // End of line - token length + 1 for 1-based
 			})
 		} else if _, isOp := operators[tokenStr]; isOp {
 			collector.AddToken(tokens.Token{
 				Type:   operators[tokenStr],
 				Lexeme: tokenStr,
+				Line:   lineNumber,
+				Column: len(line) - len(tokenStr) + 1, // End of line - token length + 1 for 1-based
 			})
 		} else if _, isDelim := delimiters[tokenStr]; isDelim {
 			collector.AddToken(tokens.Token{
 				Type:   delimiters[tokenStr],
 				Lexeme: tokenStr,
+				Line:   lineNumber,
+				Column: len(line) - len(tokenStr) + 1, // End of line - token length + 1 for 1-based
 			})
 		} else {
 			// Try to parse as number
@@ -340,11 +406,15 @@ func (l *Lexer) analyzeLine(line string, collector *tokenCollector) {
 					Type:    tokens.TOKEN_NUMBER,
 					Lexeme:  tokenStr,
 					Literal: tokenStr,
+					Line:    lineNumber,
+					Column:  len(line) - len(tokenStr) + 1, // End of line - token length + 1 for 1-based
 				})
 			} else {
 				// Default to identifier
 				collector.AddToken(tokens.Token{
 					Type:   tokens.TOKEN_IDENTIFIER,
+					Line:   lineNumber,
+					Column: len(line) - len(tokenStr) + 1, // End of line - token length + 1 for 1-based
 					Lexeme: tokenStr,
 				})
 			}
