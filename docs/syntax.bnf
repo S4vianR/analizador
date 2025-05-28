@@ -18,7 +18,7 @@
              | <block>
 
 # Declaración de variables
-<variable_declaration> ::= ("var" | "const") <identifier> ":" <type> ["=" <expression>]
+<variable_declaration> ::= ("var" | "const" | "") <identifier> ":" <type> ["=" <expression>]
 
 # Tipos de datos
 <type> ::= "int" | "float" | "str" | "bool" | "undefined" | "array"

@@ -1,0 +1,359 @@
+[
+  {
+    "type": "CONST",
+    "lexeme": "const",
+    "line": 1,
+    "column": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "hola",
+    "line": 1,
+    "column": 7
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 1,
+    "column": 11
+  },
+  {
+    "type": "STR",
+    "lexeme": "str",
+    "line": 1,
+    "column": 13
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 1,
+    "column": 17
+  },
+  {
+    "type": "STRING",
+    "lexeme": "Hola",
+    "literal": "Hola",
+    "line": 1,
+    "column": 19
+  },
+  {
+    "type": "CONST",
+    "lexeme": "const",
+    "line": 2,
+    "column": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "saludos",
+    "line": 2,
+    "column": 7
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 2,
+    "column": 14
+  },
+  {
+    "type": "ARRAY",
+    "lexeme": "array",
+    "line": 2,
+    "column": 16
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 2,
+    "column": 22
+  },
+  {
+    "type": "LBRACKET",
+    "lexeme": "[",
+    "line": 2,
+    "column": 24
+  },
+  {
+    "type": "STRING",
+    "lexeme": "mundo",
+    "literal": "mundo",
+    "line": 2,
+    "column": 25
+  },
+  {
+    "type": "COMMA",
+    "lexeme": ",",
+    "line": 2,
+    "column": 32
+  },
+  {
+    "type": "STRING",
+    "lexeme": "amigo",
+    "literal": "amigo",
+    "line": 2,
+    "column": 34
+  },
+  {
+    "type": "COMMA",
+    "lexeme": ",",
+    "line": 2,
+    "column": 41
+  },
+  {
+    "type": "STRING",
+    "lexeme": "programador",
+    "literal": "programador",
+    "line": 2,
+    "column": 43
+  },
+  {
+    "type": "COMMA",
+    "lexeme": ",",
+    "line": 2,
+    "column": 56
+  },
+  {
+    "type": "STRING",
+    "lexeme": "desarrollador",
+    "literal": "desarrollador",
+    "line": 2,
+    "column": 58
+  },
+  {
+    "type": "COMMA",
+    "lexeme": ",",
+    "line": 2,
+    "column": 73
+  },
+  {
+    "type": "STRING",
+    "lexeme": "mundo cruel",
+    "literal": "mundo cruel",
+    "line": 2,
+    "column": 75
+  },
+  {
+    "type": "RBRACKET",
+    "lexeme": "]",
+    "line": 2,
+    "column": 88
+  },
+  {
+    "type": "FUNC",
+    "lexeme": "func",
+    "line": 3,
+    "column": 1
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "main",
+    "line": 3,
+    "column": 6
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 3,
+    "column": 10
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 3,
+    "column": 11
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 3,
+    "column": 13
+  },
+  {
+    "type": "VAR",
+    "lexeme": "var",
+    "line": 4,
+    "column": 5
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 4,
+    "column": 9
+  },
+  {
+    "type": "COLON",
+    "lexeme": ":",
+    "line": 4,
+    "column": 10
+  },
+  {
+    "type": "INT",
+    "lexeme": "int",
+    "line": 4,
+    "column": 12
+  },
+  {
+    "type": "ASSIGN",
+    "lexeme": "=",
+    "line": 4,
+    "column": 16
+  },
+  {
+    "type": "NUMBER",
+    "lexeme": "0",
+    "literal": "0",
+    "line": 4,
+    "column": 18
+  },
+  {
+    "type": "FOR",
+    "lexeme": "for",
+    "line": 5,
+    "column": 5
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "x",
+    "line": 5,
+    "column": 9
+  },
+  {
+    "type": "RANGE",
+    "lexeme": "range",
+    "line": 5,
+    "column": 11
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 5,
+    "column": 16
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "len",
+    "line": 5,
+    "column": 17
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 5,
+    "column": 20
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "saludos",
+    "line": 5,
+    "column": 21
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 5,
+    "column": 28
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 5,
+    "column": 29
+  },
+  {
+    "type": "LBRACE",
+    "lexeme": "{",
+    "line": 5,
+    "column": 31
+  },
+  {
+    "type": "PRINT",
+    "lexeme": "print",
+    "line": 6,
+    "column": 9
+  },
+  {
+    "type": "LPAREN",
+    "lexeme": "(",
+    "line": 6,
+    "column": 14
+  },
+  {
+    "type": "STRING",
+    "lexeme": "¡",
+    "literal": "¡",
+    "line": 6,
+    "column": 15
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 6,
+    "column": 20
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "hola",
+    "line": 6,
+    "column": 22
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 6,
+    "column": 27
+  },
+  {
+    "type": "STRING",
+    "lexeme": " ",
+    "literal": " ",
+    "line": 6,
+    "column": 29
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 6,
+    "column": 33
+  },
+  {
+    "type": "IDENTIFIER",
+    "lexeme": "saludos[x]",
+    "line": 6,
+    "column": 35
+  },
+  {
+    "type": "PLUS",
+    "lexeme": "+",
+    "line": 6,
+    "column": 46
+  },
+  {
+    "type": "STRING",
+    "lexeme": "!",
+    "literal": "!",
+    "line": 6,
+    "column": 48
+  },
+  {
+    "type": "RPAREN",
+    "lexeme": ")",
+    "line": 6,
+    "column": 51
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 7,
+    "column": 5
+  },
+  {
+    "type": "RBRACE",
+    "lexeme": "}",
+    "line": 8,
+    "column": 1
+  },
+  {
+    "type": "EOF",
+    "line": 9,
+    "column": 1
+  }
+]

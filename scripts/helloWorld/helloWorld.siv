@@ -1,0 +1,8 @@
+const hola: str = "Hola"
+const saludos: array = ["mundo", "amigo", "programador", "desarrollador", "mundo cruel"]
+func main() {
+    var x: int = 0
+    for x range(len(saludos)) {
+        print("¡" + hola + " " + saludos[x] + "!")
+    }
+}

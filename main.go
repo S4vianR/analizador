@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -145,17 +144,6 @@ func main() {
 		// Mostrar mensaje de éxito claro
 		fmt.Printf("\n✅ El código es válido.\n")
 
-		// Guardar el AST en un archivo JSON
-		astFile := strings.TrimSuffix(sourceFile, ".siv") + ".ast.json"
-		astJSON, err := json.MarshalIndent(result.ast, "", "  ")
-		if err != nil {
-			log.Printf("Error al serializar el AST: %v", err)
-		} else if err := os.WriteFile(astFile, astJSON, 0644); err != nil {
-			log.Printf("Error al guardar el AST: %v", err)
-		} else {
-			fmt.Printf("✅ AST guardado en: %s\n", astFile)
-		}
-
 	case <-done:
 		// Si la barra de progreso termina primero, esperar el resultado del análisis
 		result := <-astChan
@@ -169,16 +157,5 @@ func main() {
 
 		// Mostrar mensaje de éxito claro
 		fmt.Printf("\n✅ El código es válido.\n")
-
-		// Guardar el AST en un archivo JSON
-		astFile := strings.TrimSuffix(sourceFile, ".siv") + ".ast.json"
-		astJSON, err := json.MarshalIndent(result.ast, "", "  ")
-		if err != nil {
-			log.Printf("Error al serializar el AST: %v", err)
-		} else if err := os.WriteFile(astFile, astJSON, 0644); err != nil {
-			log.Printf("Error al guardar el AST: %v", err)
-		} else {
-			fmt.Printf("✅ AST guardado en: %s\n", astFile)
-		}
 	}
 }

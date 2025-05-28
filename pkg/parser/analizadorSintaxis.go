@@ -419,13 +419,37 @@ func (p *Parser) parseFor() error {
 	if err != nil {
 		return err
 	}
-	// Consumir variable_declaration, in, range, (, expresión, )
-	for {
-		tok := p.peekToken()
-		if tok.Type == tokens.TOKEN_LBRACE || tok.Type == tokens.TOKEN_EOF {
-			break
+	// Esperar IDENTIFIER
+	varTok, err := p.expectToken(tokens.TOKEN_IDENTIFIER)
+	if err != nil {
+		return fmt.Errorf("Error de sintaxis en %s:%d:%d: se esperaba un identificador después de 'for'", p.sourceFile, varTok.Line, varTok.Column)
+	}
+	// Esperar IN
+	inTok, err := p.expectToken(tokens.TOKEN_RESERVED_IN)
+	if err != nil {
+		return fmt.Errorf("Error de sintaxis en %s:%d:%d: se esperaba 'in' después del identificador en 'for'", p.sourceFile, inTok.Line, inTok.Column)
+	}
+	// Esperar RANGE
+	rangeTok, err := p.expectToken(tokens.TOKEN_RESERVED_RANGE)
+	if err != nil {
+		return fmt.Errorf("Error de sintaxis en %s:%d:%d: se esperaba 'range' después de 'in' en 'for'", p.sourceFile, rangeTok.Line, rangeTok.Column)
+	}
+	// Esperar '('
+	lpTok, err := p.expectToken(tokens.TOKEN_LPAREN)
+	if err != nil {
+		return fmt.Errorf("Error de sintaxis en %s:%d:%d: se esperaba '(' después de 'range' en 'for'", p.sourceFile, lpTok.Line, lpTok.Column)
+	}
+	// Consumir la expresión dentro de range hasta ')'
+	parenCount := 1
+	for parenCount > 0 {
+		tok := p.nextToken()
+		if tok.Type == tokens.TOKEN_LPAREN {
+			parenCount++
+		} else if tok.Type == tokens.TOKEN_RPAREN {
+			parenCount--
+		} else if tok.Type == tokens.TOKEN_EOF {
+			return fmt.Errorf("Error de sintaxis en %s:%d:%d: paréntesis sin cerrar en 'range' del for", p.sourceFile, tok.Line, tok.Column)
 		}
-		p.nextToken()
 	}
 	return p.parseBlockOrSingleStatement()
 }

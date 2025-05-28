@@ -60,8 +60,9 @@ elif cliente_frecuente != true {
 ## Ciclo
 El único ciclo será con el típico for-loop y while-loop
 ```typescript
-for var: int = x in range(10) {
-    print(x)
+var dato: int = 0
+for dato in range(10) {
+    print(dato)
 }
 
 while cliente_frecuente {
